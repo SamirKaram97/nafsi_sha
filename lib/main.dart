@@ -20,11 +20,7 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await ApiServices.initDio();
   await SharedHelper.init();
-  await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
+  initBackgroundedServices();
    runApp(DevicePreview(builder: (context) =>  const Nafsi(),    enabled: kReleaseMode,
    ));
 }
@@ -60,7 +56,7 @@ class Nafsi extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: const Color(0XFF80542F)),
               useMaterial3: true,
             ),
-            home:  const StartingScreen(),
+            home:   const LayoutScreen(),
           );
         },
         listener: (BuildContext context, AppStates state) {},
@@ -82,6 +78,18 @@ class StartingScreen extends StatelessWidget {
     return const LayoutScreen();
   }
 }
+
+
+void initBackgroundedServices()async
+{
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+}
+
+
 
 
 

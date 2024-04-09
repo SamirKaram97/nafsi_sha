@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp_nafsi/screens/login/cubit/login_cubit.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
@@ -31,7 +33,8 @@ class MoodTrackerSection extends StatelessWidget {
               const SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: CustomButton(title: AppStrings.detectYourFeeling.toUpperCase(), onPressed: (){}),
+                child: CustomButton(title: AppStrings.detectYourFeeling.toUpperCase(), onPressed: (){
+                }),
               )
             ],
           ),

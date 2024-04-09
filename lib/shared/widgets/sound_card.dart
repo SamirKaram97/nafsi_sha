@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/widgets/play_icon_widget.dart';
 
@@ -21,7 +22,13 @@ class SoundCard extends StatelessWidget {
       },
       child: ListTile(
         contentPadding: EdgeInsetsDirectional.zero,
-        leading: ClipRRect(borderRadius: BorderRadius.circular(20.0),child: Image.network(soundModel.coverUrl,fit: BoxFit.cover,)),
+        leading: ClipRRect(borderRadius: BorderRadius.circular(20.0),child: CachedNetworkImage(
+          imageUrl: soundModel.coverUrl,
+          fit: BoxFit.cover,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              CircularProgressIndicator(value: downloadProgress.progress),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),),
         title: Text("3:30",style: AppStyles.mSemiBold18(context).copyWith(color: const Color(0XFF2C2B49)),),
         subtitle: Text(soundModel.name,style: AppStyles.mBold18(context),),
         trailing: const Padding(

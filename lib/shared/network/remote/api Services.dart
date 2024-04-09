@@ -42,10 +42,15 @@ class ApiServices
 
 
 
-  static Future<bool> register(RegisterRequestModel registerRequestModel)async
+
+
+  static Future<bool> register(String email,String password)async
   {
 
-    var response = await _dio.post(Constants.registerEndPoint,data: registerRequestModel.toJson());
+    var response = await _dio.post(Constants.registerEndPoint,data: {
+      "email":email,
+      "password":password
+    });
     if(response.statusCode==200)
       {
         return true;
@@ -94,7 +99,6 @@ class ApiServices
               return error.response?.data["error"]??error.response?.data["Error"];
             }
           }
-
         case DioExceptionType.cancel:
           return AppStrings.someThingWentWrong;
         case DioExceptionType.connectionError:

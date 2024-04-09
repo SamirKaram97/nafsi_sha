@@ -1,10 +1,10 @@
 
 
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_state.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../../models/sound_model.dart';
 
@@ -117,8 +117,8 @@ class SoundsCubit extends Cubit<SoundsState>
     if(index!=currentSound) {
       currentSound=index;
       await audioPlayer.seek(Duration.zero, index: currentSound);
+      _playSound();
     }
-    _playSound();
     emit(SoundsChangeCurrentSoundState());
   }
 
@@ -133,7 +133,6 @@ class SoundsCubit extends Cubit<SoundsState>
         currentPositionDuration=current;
         emit(SoundsDurationOrPositionState());
       }
-
     });
 
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../styles/colors.dart';
 import '../styles/styles.dart';
 
@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
   });
 
-  final String title;
+  final String? title;
   final VoidCallback? onPressed;
 
   @override
@@ -22,8 +22,10 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           minimumSize: const Size(double.infinity, 62),
         ),
-        child: Text(
-          title,
+        child: title==null?LoadingAnimationWidget.prograssiveDots(
+          color: Colors.white, size: 60,
+        ):Text(
+          title!,
           style: AppStyles.rBold16(context),
         ));
   }

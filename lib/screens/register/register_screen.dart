@@ -60,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
                               title: AppStrings.password,
                               controller: registerCubit.passwordController),
                           const Spacer(),
-                          CustomButton(title: AppStrings.createMyAccount, onPressed: () {
+                          CustomButton(title: state is RegisterLoadingState?null:AppStrings.createMyAccount, onPressed: () {
                             if(formKey.currentState!.validate())
                               {
                             registerCubit.register();

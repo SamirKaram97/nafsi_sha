@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gp_nafsi/screens/login/cubit/login_cubit.dart';
 import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
+import 'package:gp_nafsi/screens/register/cubit/register_states.dart';
 import 'package:gp_nafsi/screens/register/register_screen.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
@@ -67,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                                     style: AppStyles.mMedium14(context),
                                   ))),
                           const Spacer(),
-                          CustomButton(title: AppStrings.signIn, onPressed: () {
+                          CustomButton(title: state is LoginLoadingState?null:AppStrings.signIn, onPressed: () {
                             if(formKey.currentState!.validate())
                               {
                                 loginCubit.login();

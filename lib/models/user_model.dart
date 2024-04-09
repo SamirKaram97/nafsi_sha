@@ -1,9 +1,9 @@
 class UserModel {
   final String id;
-  final String fName;
-  final String lName;
-  final String email;
-  final int age;
+  final String? fName;
+  final String? lName;
+  final String? email;
+  final int? age;
   final List<dynamic> preferance;
   final List<dynamic> mood;
   final List<String> keywords;

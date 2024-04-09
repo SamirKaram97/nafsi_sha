@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_waveform/just_waveform.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_cubit.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_state.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
-
+import 'dart:io';
+import 'dart:math';
+import 'package:path/path.dart' as p;
+import 'package:flutter/services.dart';
 import '../../shared/widgets/sound_card.dart';
 
 class SoundsScreen extends StatelessWidget {
@@ -26,6 +30,7 @@ class SoundsScreen extends StatelessWidget {
       listener: (context, state) {},
     );
   }
+
 }
 
 

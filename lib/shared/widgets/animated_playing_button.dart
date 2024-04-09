@@ -1,8 +1,9 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
+
+import '../../screens/sounds/cubit/sounds_cubit.dart';
 
 class AnimatedPlayButton extends StatefulWidget {
   final Icon playIcon;
@@ -10,21 +11,22 @@ class AnimatedPlayButton extends StatefulWidget {
   final VoidCallback onPressed;
   final bool isPlaying;
 
-  const AnimatedPlayButton({super.key,
+  AnimatedPlayButton({
+    super.key,
     required this.onPressed,
     this.playIcon = const Icon(Icons.play_arrow),
-    this.pauseIcon = const Icon(Icons.pause), required this.isPlaying,
+    this.pauseIcon = const Icon(Icons.pause),
+    required this.isPlaying,
   });
 
   @override
   _AnimatedPlayButtonState createState() => _AnimatedPlayButtonState();
 }
 
-class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProviderStateMixin {
+class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
+    with TickerProviderStateMixin {
   static const _kToggleDuration = Duration(milliseconds: 300);
   static const _kRotationDuration = Duration(seconds: 5);
-
-
 
   // rotation and scale animations
   late AnimationController _rotationController;
@@ -32,36 +34,37 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
   double _rotation = 0;
   double _scale = 0.85;
 
-
   bool get _showWaves => !_scaleController.isDismissed;
 
   void _updateRotation() => _rotation = _rotationController.value * 2 * pi;
+
   void _updateScale() => _scale = (_scaleController.value * 0.2) + 0.85;
 
   @override
   void initState() {
+    print("form init");
     _rotationController =
-    AnimationController(vsync: this, duration: _kRotationDuration)
-      ..addListener(() => setState(_updateRotation))
-      ..repeat();
-
+        AnimationController(vsync: this, duration: _kRotationDuration)
+          ..addListener(() => setState(_updateRotation))
+          ..repeat();
     _scaleController =
-    AnimationController(vsync: this, duration: _kToggleDuration)
-      ..addListener(() => setState(_updateScale));
-
-      _scaleController.forward();
-
+        AnimationController(vsync: this, duration: _kToggleDuration)
+          ..addListener(() => setState(_updateScale));
+    SoundsCubit.get(context).audioPlayer.playerStateStream.listen((event) {
+      if (event.playing) {
+        if (_scaleController.isCompleted) {
+          _scaleController.reverse();
+        } else {
+          _scaleController.forward();
+        }
+      } else {
+        _scaleController.reverse();
+      }
+    });
     super.initState();
   }
 
   void _onToggle() {
-
-    if (_scaleController.isCompleted) {
-      _scaleController.reverse();
-    } else {
-      _scaleController.forward();
-    }
-
     widget.onPressed();
   }
 
@@ -84,8 +87,14 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
         alignment: Alignment.center,
         children: [
           if (_showWaves) ...[
-            Blob(color: AppColors.lightBlue, scale: _scale, rotation: _rotation * 2 - 30),
-            Blob(color: AppColors.lightBlue.withOpacity(0.3), scale: _scale, rotation: _rotation * 3 - 45),
+            Blob(
+                color: AppColors.lightBlue,
+                scale: _scale,
+                rotation: _rotation * 2 - 30),
+            Blob(
+                color: AppColors.lightBlue.withOpacity(0.3),
+                scale: _scale,
+                rotation: _rotation * 3 - 45),
           ],
           Container(
             constraints: const BoxConstraints.expand(),
@@ -116,7 +125,8 @@ class Blob extends StatelessWidget {
   final double scale;
   final Color color;
 
-  const Blob({super.key, required this.color, this.rotation = 0, this.scale = 1});
+  const Blob(
+      {super.key, required this.color, this.rotation = 0, this.scale = 1});
 
   @override
   Widget build(BuildContext context) {

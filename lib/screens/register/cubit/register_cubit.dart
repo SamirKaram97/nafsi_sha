@@ -29,8 +29,9 @@ class RegisterCubit extends Cubit<RegisterStates>
     emit(RegisterLoadingState());
     try
     {
-       RegisterRequestModel requestModel=RegisterRequestModel(firstname: "Mohamed",age: "40",lastname: "gmomma",email: emailController.text,gender:"male",password: passwordController.text);
-      bool response=await ApiServices.register(requestModel);
+       // RegisterRequestModel requestModel=RegisterRequestModel(firstname: "Mohamed",age: "40",lastname: "gmomma",email: emailController.text,gender:"male",password: passwordController.text);
+
+      bool response=await ApiServices.register(emailController.text,passwordController.text);
       if(response)
         {
           emit(RegisterSuccessState());

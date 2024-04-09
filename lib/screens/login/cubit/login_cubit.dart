@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/models/user_model.dart';
@@ -34,6 +36,7 @@ class LoginCubit extends Cubit<LoginStates>
           emit(LoginSuccessState(userModel: userModel));
         }
         catch (error) {
+      log(error.toString());
       emit(LoginErrorState(errorMessage: ApiServices.getErrorMessage(error)));
     }
   }

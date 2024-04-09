@@ -1,4 +1,5 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_cubit.dart';
@@ -38,10 +39,12 @@ class MusicPlayerScreen extends StatelessWidget {
                               Expanded(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(14.0),
-                                  child: Image.network(
-                                    cubit.sounds[cubit.currentSound].coverUrl,
+                                  child: CachedNetworkImage(
+                                    imageUrl: cubit.sounds[cubit.currentSound].coverUrl,
                                     fit: BoxFit.cover,
-                                    width: double.infinity,
+                                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                        CircularProgressIndicator(value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error),
                                   ),
                                 ),
                               ),

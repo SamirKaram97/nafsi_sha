@@ -37,6 +37,7 @@ class DayAndMoodItem extends StatelessWidget {
                   ),
                 ),
                 FittedBox(
+                  fit: BoxFit.scaleDown,
                   child: Text(
                     dayAndMoodItemModel.number,
                     style: AppStyles.mMedium18(context),

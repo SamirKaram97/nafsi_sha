@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 
+import '../../generated/l10n.dart';
 import '../styles/styles.dart';
 
 class TestQuestionAnswerSelection extends StatefulWidget {
@@ -41,7 +42,7 @@ class _TestQuestionAnswerSelectionState extends State<TestQuestionAnswerSelectio
                   width: 2.0,
                 ),
               ),
-              child: Center(child: Text("disagree",style: AppStyles.mBold14(context).copyWith(color: answer==0?Colors.white:null),)),
+              child: Center(child: Text(S.of(context).agree,style: AppStyles.mBold14(context).copyWith(color: answer==0?Colors.white:null),)),
             ),
           ),
           GestureDetector(
@@ -118,7 +119,7 @@ class _TestQuestionAnswerSelectionState extends State<TestQuestionAnswerSelectio
                   width: 2.0,
                 ),
               ),
-              child: Center(child: Text("disagree",style: AppStyles.mBold14(context).copyWith(color: answer==4?Colors.white:null),)) ,
+              child: Center(child: Text(S.of(context).disagree,style: AppStyles.mBold14(context).copyWith(color: answer==4?Colors.white:null),)) ,
             ),
           ),
         ],

@@ -5,8 +5,11 @@ class Constants
   static const String registerEndPoint="auth/register";
   static const String getArticlesEndPoint="articles/getall";
   static const String getVideosEndPoint="videos/get-videos";
-  static const int connectTimeOut=10;
+  static const int connectTimeOut=180;
 
 
   static const String tokenSharedKey="token";
+  static const String languageSharedToken="language";
+  static const String favouriteArticlesSharedToken="favouriteArticles";
+  static const String favouriteTestsSharedToken="favouriteTests";
 }

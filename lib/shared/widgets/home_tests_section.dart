@@ -5,7 +5,7 @@ import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:gp_nafsi/shared/widgets/test_card.dart';
-
+import 'package:gp_nafsi/generated/l10n.dart';
 import 'load_more_button.dart';
 
 class HomeTestsSection extends StatelessWidget {
@@ -13,24 +13,34 @@ class HomeTestsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionTitle(title: AppStrings.tests),
-        const SizedBox(height: 15,),
+        SectionTitle(title: S.of(context).tests),
+        const SizedBox(
+          height: 15,
+        ),
         const TestCard(),
-        const SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         const TestCard(),
-        const SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         const TestCard(),
-        const SizedBox(height: 15,),
-        LoadMoreButton(onTab: () {
-          LayoutCubit.get(context).changeBottomNavBarIndex(6,context);
-        },),
-        const SizedBox(height: 30,),
+        const SizedBox(
+          height: 15,
+        ),
+        LoadMoreButton(
+          onTab: () {
+            LayoutCubit.get(context).changeBottomNavBarIndex(6, context);
+          },
+        ),
+        const SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
 }
-
-

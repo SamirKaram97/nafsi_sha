@@ -32,7 +32,7 @@ class SoundCard extends StatelessWidget {
         title: Text("3:30",style: AppStyles.mSemiBold18(context).copyWith(color: const Color(0XFF2C2B49)),),
         subtitle: Text(soundModel.name,style: AppStyles.mBold18(context),),
         trailing: const Padding(
-          padding: EdgeInsets.only(right: 14),
+          padding: EdgeInsetsDirectional.only(end: 14),
           child: PlayIconWidget(),
         ),
       ),

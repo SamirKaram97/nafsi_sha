@@ -1,6 +1,7 @@
 
 
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_state.dart';
@@ -144,7 +145,6 @@ class SoundsCubit extends Cubit<SoundsState>
       LayoutCubit.get(context).changeAppSoundPlay(event);
       emit(SoundsPlaySongChangeState());
     });
-
   }
 
   void _listenToIndex()

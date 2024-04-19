@@ -51,12 +51,10 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
         AnimationController(vsync: this, duration: _kToggleDuration)
           ..addListener(() => setState(_updateScale));
     SoundsCubit.get(context).audioPlayer.playerStateStream.listen((event) {
+
       if (event.playing) {
-        if (_scaleController.isCompleted) {
-          _scaleController.reverse();
-        } else {
           _scaleController.forward();
-        }
+
       } else {
         _scaleController.reverse();
       }

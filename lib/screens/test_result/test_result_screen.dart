@@ -3,7 +3,7 @@ import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/custom_app_bar.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
-
+import 'package:gp_nafsi/generated/l10n.dart';
 import '../../shared/widgets/test_and_explain_result.dart';
 import '../../shared/widgets/test_score_and_description_section.dart';
 
@@ -19,6 +19,7 @@ class TestResultScreen extends StatelessWidget {
           child: Column(
         children: [
           CustomAppBar(
+            deep: true,
             backButton: true,
           ),
           Expanded(child: TestResultScreenBody()),
@@ -33,7 +34,7 @@ class TestResultScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -46,7 +47,7 @@ class TestResultScreenBody extends StatelessWidget {
 
             //head ready text
             Text(
-              AppStrings.yourResultsAreReady,
+              S.of(context).yourResultsAreReady,
               style: AppStyles.mExtraBold50(context),
               textAlign: TextAlign.center,
             ),
@@ -59,41 +60,32 @@ class TestResultScreenBody extends StatelessWidget {
             const TestScoreAndDescriptionSection(),
 
             //space
-            const SizedBox(height: 25,),
+            const SizedBox(
+              height: 25,
+            ),
 
             //Test And Explain Result List
-            ListView.separated(shrinkWrap: true,physics: const NeverScrollableScrollPhysics(),itemBuilder: (context, index) => const TestAndExplainResult(), separatorBuilder:(context, index) => const SizedBox(height: 48,), itemCount: 3),
-
+            ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => const TestAndExplainResult(),
+                separatorBuilder: (context, index) => const SizedBox(
+                      height: 48,
+                    ),
+                itemCount: 3),
 
             //submit Button
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
-              child: CustomButton(title: AppStrings.done, onPressed: (){
-                Navigator.popUntil(context, (route) => route.isFirst);
-              }),
+              child: CustomButton(
+                  title: S.of(context).done,
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  }),
             )
-
-
-
-
-
-
           ],
         ),
       ),
     );
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -39,4 +39,5 @@ class AppStrings
   static const String passwordMustBeNotEmpty="Password must be not empty";
   static const String pleaseEnterACorrectEmail="Please enter a correct email";
   static const String passwordMustBeMoreThan6="Password must be more than 6 characters";
+  static const networkError="Please check your network connection and try again";
 }

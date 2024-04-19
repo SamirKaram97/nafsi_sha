@@ -1,3 +1,4 @@
+import 'package:gp_nafsi/models/article_models.dart';
 import 'package:gp_nafsi/shared/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,6 +23,29 @@ class SharedHelper
       await pref!.setString(Constants.tokenSharedKey, token);
     }
   }
+
+  static Future<void> saveLanguage(String language)async
+  {
+
+      await pref!.setString(Constants.languageSharedToken, language);
+  }
+
+  static String getLanguage()
+  {
+    return pref!.getString(Constants.languageSharedToken)??"en";
+  }
+
+  static Future<void> saveFavouriteArticles(List<ArticleModel> articles)async
+  {
+    pref!.setString(Constants.favouriteArticlesSharedToken, ArticleModel.encode(articles));
+  }
+
+  static List<ArticleModel> getFavouriteArticles()
+  {
+    String articles=  pref!.getString(Constants.favouriteArticlesSharedToken)??"[]";
+    return ArticleModel.decode(articles);
+  }
+
 
 
 
@@ -103,6 +127,7 @@ class SharedHelper
   static Future<void>removeShared()async
   {
     await pref!.clear();
+
   }
 
 

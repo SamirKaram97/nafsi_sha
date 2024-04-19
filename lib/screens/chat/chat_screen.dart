@@ -19,7 +19,7 @@ class ChatScreen extends StatelessWidget {
           return const Scaffold(
           body: SafeArea(child: Column(
             children: [
-              CustomAppBar(backButton: true,),
+              CustomAppBar(backButton: true,deep: true),
 
               //messages list
               Expanded(child: ChatMessagesList()),

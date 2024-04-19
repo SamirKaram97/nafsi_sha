@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:validators/validators.dart' as validators;
-
+import 'package:gp_nafsi/generated/l10n.dart';
 import '../styles/colors.dart';
 
 class CustomTextFormFiled extends StatelessWidget {
   const CustomTextFormFiled({
-    super.key, required this.controller,
+    super.key,
+    required this.controller,
   });
 
   final TextEditingController controller;
@@ -22,7 +22,8 @@ class CustomTextFormFiled extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
           ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 14,horizontal: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
@@ -32,32 +33,28 @@ class CustomTextFormFiled extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
           ),
           filled: true,
-          fillColor: AppColors.greyColor
-      ),
+          fillColor: AppColors.greyColor),
       validator: (value) {
-        return emailValidatorMethod(value);
+        return emailValidatorMethod(value, context);
       },
     );
   }
 
-  String? emailValidatorMethod(String? email)
-  {
-    if(email!.isEmpty)
-    {
-      return AppStrings.emailMustBeNotEmpty;
+  String? emailValidatorMethod(String? email, context) {
+    if (email!.isEmpty) {
+      return S.of(context).emailMustBeNotEmpty;
     }
-    if(!validators.isEmail(email))
-    {
-      return AppStrings.pleaseEnterACorrectEmail;
+    if (!validators.isEmail(email)) {
+      return S.of(context).pleaseEnterACorrectEmail;
     }
   }
 }
 
-
 class CustomPasswordTextFormFiled extends StatelessWidget {
-   const CustomPasswordTextFormFiled({
-    super.key, required this.controller,required this.cubit,
-
+  const CustomPasswordTextFormFiled({
+    super.key,
+    required this.controller,
+    required this.cubit,
   });
 
   final TextEditingController controller;
@@ -68,12 +65,13 @@ class CustomPasswordTextFormFiled extends StatelessWidget {
     return TextFormField(
       obscureText: !cubit.isPasswordShown,
       controller: controller,
-      decoration:  InputDecoration(
+      decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
           ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 14,horizontal: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
@@ -83,24 +81,26 @@ class CustomPasswordTextFormFiled extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
           ),
           filled: true,
-          suffixIcon: InkWell(onTap: (){cubit.changePasswordVisibility();},child:  Icon(cubit.isPasswordShown?Icons.visibility_off:Icons.visibility)),
-          fillColor: AppColors.greyColor
-      ),
+          suffixIcon: InkWell(
+              onTap: () {
+                cubit.changePasswordVisibility();
+              },
+              child: Icon(cubit.isPasswordShown
+                  ? Icons.visibility_off
+                  : Icons.visibility)),
+          fillColor: AppColors.greyColor),
       validator: (value) {
-        return passwordValidatorMethod(value);
+        return passwordValidatorMethod(value, context);
       },
     );
   }
 
-   String? passwordValidatorMethod(String? password)
-   {
-     if(password!.isEmpty)
-     {
-       return AppStrings.passwordMustBeNotEmpty;
-     }
-     if(password.length<6)
-     {
-       return AppStrings.passwordMustBeMoreThan6;
-     }
-   }
+  String? passwordValidatorMethod(String? password, context) {
+    if (password!.isEmpty) {
+      return S.of(context).passwordMustBeNotEmpty;
+    }
+    if (password.length < 6) {
+      return S.of(context).passwordMustBeMoreThan6;
+    }
+  }
 }

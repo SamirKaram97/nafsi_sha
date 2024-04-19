@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
-
+import 'package:gp_nafsi/generated/l10n.dart';
 import '../styles/styles.dart';
 
 class DividerWithOrSection extends StatelessWidget {
@@ -24,7 +24,7 @@ class DividerWithOrSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            AppStrings.or,
+            S.of(context).or,
             style: AppStyles.rLight16(context),
           ),
         ),

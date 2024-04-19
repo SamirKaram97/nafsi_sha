@@ -4,6 +4,7 @@ import 'package:gp_nafsi/layout/layout_screen.dart';
 import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
 import 'package:gp_nafsi/screens/preferences/preferences_screen.dart';
 import 'package:gp_nafsi/shared/cubit/app_cubit.dart';
+import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
 
 import '../../models/user_model.dart';
 import '../../screens/register/cubit/register_states.dart';
@@ -34,10 +35,11 @@ class StatesHandler
     }
   }
 
-  static void _loginSuccessMethod(UserModel userModel,context)
+  static void _loginSuccessMethod(UserModel userModel,context)async
   {
     SharedHelper.saveToken(userModel.token);
     AppCubit.get(context).token=userModel.token;
+    // await ApiServices.addTokenToDio(userModel.token!);
     navToNoBack(context, const LayoutScreen());
   }
 

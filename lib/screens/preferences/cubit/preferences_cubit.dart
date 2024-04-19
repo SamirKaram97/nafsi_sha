@@ -3,31 +3,48 @@ import 'package:gp_nafsi/screens/login/login_screen.dart';
 import 'package:gp_nafsi/screens/preferences/cubit/preferences_states.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/generated/l10n.dart';
 
-class PreferencesCubit extends Cubit<PreferencesStates>
-{
-  PreferencesCubit():super(PreferencesInitialState());
-  static PreferencesCubit get(context)=> BlocProvider.of(context);
-  List<String> preferencesList=["Work","Hobbies","Family","Breakup","Weather","Wife","Party","Love","Self esteem","Sleep","Social","Food","Self esteem","Sleep","Social","Food","Self esteem","Sleep","Social","Food",];
-  List<String> selectedPreferencesList=[];
+class PreferencesCubit extends Cubit<PreferencesStates> {
+  PreferencesCubit() : super(PreferencesInitialState());
+  static PreferencesCubit get(context) => BlocProvider.of(context);
+  List<String> preferencesList = [
+    "Work",
+    "Hobbies",
+    "Family",
+    "Breakup",
+    "Weather",
+    "Wife",
+    "Party",
+    "Love",
+    "Self esteem",
+    "Sleep",
+    "Social",
+    "Food",
+    "Self esteem",
+    "Sleep",
+    "Social",
+    "Food",
+    "Self esteem",
+    "Sleep",
+    "Social",
+    "Food",
+  ];
+  List<String> selectedPreferencesList = [];
 
-
-  selectPreferenceItem(String item)
-  {
-    if(selectedPreferencesList.contains(item))
-      {
-        selectedPreferencesList.remove(item);
-      }
-    else {
+  selectPreferenceItem(String item) {
+    if (selectedPreferencesList.contains(item)) {
+      selectedPreferencesList.remove(item);
+    } else {
       selectedPreferencesList.add(item);
     }
     emit(SelectPreferenceItemState());
   }
 
-  saveAndContinueButton(context)
-  {
-    showToast(state: ToastState.SUCCESS, text: AppStrings.accountCreatedSuccessfully);
+  saveAndContinueButton(context) {
+    showToast(
+        state: ToastState.SUCCESS,
+        text: S.of(context).accountCreatedSuccessfully);
     navToNoBack(context, LoginScreen());
   }
-
 }

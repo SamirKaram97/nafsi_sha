@@ -29,6 +29,7 @@ class MusicPlayerScreen extends StatelessWidget {
                 children: [
                   const CustomAppBar(
                     backButton: true,
+                    deep: true,
                   ),
                   Expanded(
                       child: Padding(
@@ -40,6 +41,7 @@ class MusicPlayerScreen extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(14.0),
                                   child: CachedNetworkImage(
+                                    width: double.infinity,
                                     imageUrl: cubit.sounds[cubit.currentSound].coverUrl,
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder: (context, url, downloadProgress) =>

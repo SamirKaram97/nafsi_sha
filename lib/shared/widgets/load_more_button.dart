@@ -1,12 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-
+import 'package:gp_nafsi/generated/l10n.dart';
 import '../styles/styles.dart';
 import '../utils/strings.dart';
 
 class LoadMoreButton extends StatelessWidget {
   const LoadMoreButton({
-    super.key, this.onTab,
+    super.key,
+    this.onTab,
   });
   final GestureTapCallback? onTab;
 
@@ -24,7 +25,7 @@ class LoadMoreButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppStrings.loadMore,
+                  S.of(context).loadMore,
                   style: AppStyles.mMedium12(context),
                 ),
                 const Icon(Icons.add)

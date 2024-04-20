@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574491997160",
+    "project_id": "nafsi-275ff",
+    "storage_bucket": "nafsi-275ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574491997160:android:2addfe1a1dcb78aa712a5d",
+        "android_client_info": {
+          "package_name": "sha.gpnafsi.gp_nafsi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcL2mnGD1Ibn_qRwdO4mjWq_2Qkp7bLV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -68,13 +68,13 @@ class RegisterScreen extends StatelessWidget {
                                   : S.of(context).createMyAccount,
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  registerCubit.register(context);
+                                  registerCubit.register(context,registerCubit.emailController.text,registerCubit.passwordController.text);
                                 }
                               }),
                           const Spacer(),
                           const DividerWithOrSection(),
                           const Spacer(),
-                          const SocialMediaButtons(),
+                           SocialMediaButtons(googleOnPressed:()=> registerCubit.userRegisterGoogle(context)),
                           const Spacer(),
                           Row(
                             mainAxisSize: MainAxisSize.min,

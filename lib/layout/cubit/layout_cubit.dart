@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gp_nafsi/generated/l10n.dart';
 import 'package:gp_nafsi/screens/articles/articles_screen.dart';
 import 'package:gp_nafsi/screens/chat/chat_screen.dart';
@@ -83,6 +84,7 @@ class LayoutCubit extends Cubit<LayoutState> {
     SharedHelper.removeKey(Constants.tokenSharedKey);
     SoundsCubit.get(context).audioPlayer.stop();
     currentIndex = 0;
+    GoogleSignIn().signOut();
     navToNoBack(context, LoginScreen());
   }
 }

@@ -4,15 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import '../../generated/assets.dart';
 
 class SocialMediaButtons extends StatelessWidget {
-  const SocialMediaButtons({super.key});
+  const SocialMediaButtons({super.key, this.facebookOnPressed, this.googleOnPressed});
 
+  final GestureTapCallback? facebookOnPressed;
+  final GestureTapCallback? googleOnPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
-          onTap: (){},
+          onTap: googleOnPressed,
           child: Container(
             decoration: const ShapeDecoration(
               color: Colors.white,
@@ -28,7 +30,7 @@ class SocialMediaButtons extends StatelessWidget {
         ),
         const SizedBox(width: 18),
         InkWell(
-          onTap: (){},
+          onTap: facebookOnPressed,
           child: Container(
             decoration: const ShapeDecoration(
               color: Colors.white,

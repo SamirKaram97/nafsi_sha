@@ -1,6 +1,7 @@
 
 
 import 'package:gp_nafsi/layout/layout_screen.dart';
+import 'package:gp_nafsi/main.dart';
 import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
 import 'package:gp_nafsi/screens/preferences/preferences_screen.dart';
 import 'package:gp_nafsi/shared/cubit/app_cubit.dart';
@@ -40,7 +41,7 @@ class StatesHandler
     SharedHelper.saveToken(userModel.token);
     AppCubit.get(context).token=userModel.token;
     // await ApiServices.addTokenToDio(userModel.token!);
-    navToNoBack(context, const LayoutScreen());
+    navToNoBack(context, const StartingScreen());
   }
 
   static void _loginFailedMethod(LoginErrorState state)

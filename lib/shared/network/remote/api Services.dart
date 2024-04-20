@@ -99,6 +99,7 @@ class ApiServices extends Interceptor {
           return S.of(context).someThingWentWrong;
         case DioExceptionType.badResponse:
           {
+            log(error.response?.data);
             if (error.response?.data["error"] is List) {
               return error.response?.data["error"][0]["message"];
             } else {

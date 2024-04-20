@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                           const Spacer(),
                           const DividerWithOrSection(),
                           const Spacer(),
-                           SocialMediaButtons(googleOnPressed: ()=>loginCubit.userLoginGoogle(context)),
+                           SocialMediaButtons(googleOnPressed: ()=>loginCubit.userLoginGoogle(context),facebookOnPressed: ()=>loginCubit.userLoginFace(context)),
                           const Spacer(),
                           Row(
                             mainAxisSize: MainAxisSize.min,

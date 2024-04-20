@@ -32,7 +32,7 @@ class RegisterGoogleErrorState extends RegisterStates{
 
 //facebook states
 class RegisterFacebookLoadingState extends RegisterStates{}
-class LoginFacBookCancelledState extends RegisterStates{}
+class LoginFacebookCancelledState extends RegisterStates{}
 
 class RegisterFacebookSuccessState extends RegisterStates{
   RegisterFacebookSuccessState();

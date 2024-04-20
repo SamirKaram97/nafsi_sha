@@ -74,7 +74,7 @@ class RegisterScreen extends StatelessWidget {
                           const Spacer(),
                           const DividerWithOrSection(),
                           const Spacer(),
-                           SocialMediaButtons(googleOnPressed:()=> registerCubit.userRegisterGoogle(context)),
+                           SocialMediaButtons(googleOnPressed:()=> registerCubit.userRegisterGoogle(context),facebookOnPressed: ()=>registerCubit.userRegisterFace(context)),
                           const Spacer(),
                           Row(
                             mainAxisSize: MainAxisSize.min,

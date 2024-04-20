@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gp_nafsi/shared/styles/images.dart';
 
-import '../../generated/assets.dart';
 
 class SocialMediaButtons extends StatelessWidget {
   const SocialMediaButtons({super.key, this.facebookOnPressed, this.googleOnPressed});

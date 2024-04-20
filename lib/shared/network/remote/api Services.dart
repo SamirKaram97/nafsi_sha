@@ -99,12 +99,11 @@ class ApiServices extends Interceptor {
           return S.of(context).someThingWentWrong;
         case DioExceptionType.badResponse:
           {
-            log(error.response?.data);
             if (error.response?.data["error"] is List) {
               return error.response?.data["error"][0]["message"];
             } else {
-              return error.response?.data["error"] ??
-                  error.response?.data["Error"];
+              print(error.response?.data["error"]);
+              return error.response?.data["error"] ?? error.response?.data["Error"];
             }
           }
         case DioExceptionType.cancel:
@@ -115,7 +114,7 @@ class ApiServices extends Interceptor {
           return S.of(context).someThingWentWrong;
       }
     } else {
-      log(error.toString());
+      return "";
       return S.of(context).someThingWentWrongWillFix;
     }
   }

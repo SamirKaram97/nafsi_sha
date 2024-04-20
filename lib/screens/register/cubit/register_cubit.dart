@@ -67,7 +67,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
           emit(RegisterGoogleCancelledState());
         }
       }
-      catch (e)
+      on FirebaseAuthException catch (error) {
+        showToast(
+            state: ToastState.EROOR,
+            text: FirebaseServices.getRegisterMessageFromErrorCode(error.code));
+        emit(RegisterGoogleErrorState(errorMessage:FirebaseServices.getRegisterMessageFromErrorCode(error.code)));
+      }catch (e)
       {
         log(e.toString());
         showToast(state: ToastState.EROOR, text: "something went wrong please try again.");
@@ -80,11 +85,10 @@ class RegisterCubit extends Cubit<RegisterStates> {
       emit(RegisterGoogleErrorState(errorMessage: S.of(context).networkError));
       showToast(state: ToastState.EROOR, text: S.of(context).networkError);
     }
-    /*
+
   }
-  void userRegisterFace()async
+  void userRegisterFace(context)async
   {
-    emit(RegisterSocialLoadingState());
     if (await _internetConnectionChecker.hasConnection)
     {
       try
@@ -92,36 +96,28 @@ class RegisterCubit extends Cubit<RegisterStates> {
         UserCredential? userCredential=await FirebaseServices.signInWithFacebook();
         if(userCredential!=null)
         {
-          bool userExist=await FirebaseServices.doesDocumentExist("user/${userCredential.user!.uid}");
-          if(!userExist) {
-            print("new");
-            await userCreateFireStore(RegisterModelFirebase(image: "https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg",registerMethod: "facebook",date: Timestamp.fromDate(DateTime.now()), name: userCredential.user!.displayName!, email: userCredential.user!.email!, password: ''), userCredential.user!.uid);
-          }
-          else{
-            print("existed");
-          }
-          emit(RegisterSocialSuccessState(userCredential.user!.uid));
+          register(context,userCredential.user!.email!,"P@${userCredential.user!.uid}");
         }
         else
         {
-          emit(RegisterSocialCancelState());
+          emit(LoginFacebookCancelledState());
         }
-      }
-      on FirebaseAuthException catch  (error) {
-        showToast(state: ToastState.EROOR, text: getRegisterMessageFromErrorCode(error.code));
-        emit(RegisterSocialErrorState(getRegisterMessageFromErrorCode(error.code)));
-      }
+      }on FirebaseAuthException catch (error) {
+        showToast(
+            state: ToastState.EROOR,
+            text: FirebaseServices.getRegisterMessageFromErrorCode(error.code));
+        emit(RegisterFacebookErrorState(errorMessage:FirebaseServices.getRegisterMessageFromErrorCode(error.code)));}
       catch (e)
       {
-        showToast(state: ToastState.EROOR, text: AppStrings.errorSomething);
-        emit(RegisterSocialErrorState(AppStrings.errorSomething));
+        showToast(state: ToastState.EROOR, text: S.of(context).someThingWentWrong);
+        emit(RegisterFacebookErrorState(errorMessage: S.of(context).someThingWentWrong));
       }
 
     }
     else
     {
-      emit(RegisterSocialErrorState(AppStrings.networkError));
-      showToast(state: ToastState.EROOR, text: AppStrings.networkError);
+      emit(RegisterFacebookErrorState(errorMessage: S.of(context).networkError));
+      showToast(state: ToastState.EROOR, text: S.of(context).networkError);
     }
-  }*/
-}}
+  }
+}

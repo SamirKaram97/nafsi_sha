@@ -82,7 +82,6 @@ class LayoutCubit extends Cubit<LayoutState> {
 
   void logOut(context) {
     SharedHelper.removeKey(Constants.tokenSharedKey);
-    SoundsCubit.get(context).audioPlayer.stop();
     currentIndex = 0;
     GoogleSignIn().signOut();
     navToNoBack(context, LoginScreen());

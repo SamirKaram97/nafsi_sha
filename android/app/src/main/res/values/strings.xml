@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nafsi</string>
+    <string name="facebook_app_id">321815220920084</string>
+    <string name="fb_login_protocol_scheme">fb6ee1a3c58bcce036d7b0e3e06e75650b</string>
+    <string name="facebook_client_token">cd49e367960ea3ecc6b5133ac3ca2dea</string>
+</resources>

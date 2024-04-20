@@ -47,7 +47,7 @@ class MoodTrackerSection extends StatelessWidget {
                 child: CustomButton(
                     title: S.of(context).detectYourFeeling.toUpperCase(),
                     onPressed: () {
-                      HomeCubit.get(context).pickImage();
+                      // HomeCubit.get(context).pickImage();
                     }),
               )
             ],

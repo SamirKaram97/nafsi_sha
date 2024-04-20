@@ -78,13 +78,13 @@ class LoginScreen extends StatelessWidget {
                                   : S.of(context).signIn,
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  loginCubit.login(context);
+                                  loginCubit.login(context,loginCubit.emailController.text,loginCubit.passwordController.text);
                                 }
                               }),
                           const Spacer(),
                           const DividerWithOrSection(),
                           const Spacer(),
-                          const SocialMediaButtons(),
+                           SocialMediaButtons(googleOnPressed: ()=>loginCubit.userLoginGoogle(context)),
                           const Spacer(),
                           Row(
                             mainAxisSize: MainAxisSize.min,

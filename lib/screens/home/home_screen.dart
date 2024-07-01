@@ -20,10 +20,16 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               MoodTrackerSection(),
+
+              //space
               SizedBox(height: 32,),
               VideosSection(),
+
+              //space
               SizedBox(height: 35,),
               ArticlesSection(),
+
+              //space
               SizedBox(height: 35,),
               HomeTestsSection(),
             ],

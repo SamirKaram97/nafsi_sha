@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gp_nafsi/screens/video_player/video_player_screen.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
 import 'package:gp_nafsi/shared/widgets/play_icon_widget.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../../models/video_response.dart';
 import '../styles/colors.dart';
 import '../styles/images.dart';
 import '../styles/styles.dart';
 import '../utils/strings.dart';
+import 'package:shimmer/shimmer.dart';
 
 class VideoCard extends StatelessWidget {
   const VideoCard({
@@ -18,6 +19,8 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(videoResponse.imageLink??"nullllllllllllll");
+
     return InkWell(
       onTap: () {
         navTo(context,  VideoPlayerScreen(videoResponse: videoResponse,));
@@ -26,9 +29,9 @@ class VideoCard extends StatelessWidget {
         aspectRatio: 343 / 281,
         child: Container(
           decoration: ShapeDecoration(
-            image: const DecorationImage(
-                image: AssetImage(
-                  Assets.imagesVideoCardImage,
+            image:  DecorationImage(
+                image: NetworkImage(
+                  videoResponse.imageLink??"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBD0QVr-15nU3xny685gcltIOO80r_knw73vLwVCP3FP_X7oHvMWN1xr1WpRxhcG768oE&usqp=CAU",
                 ),
                 fit: BoxFit.cover),
             shape: RoundedRectangleBorder(
@@ -52,14 +55,6 @@ class VideoCard extends StatelessWidget {
                   style: AppStyles.mSemiBold20(context),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(start: 28),
-                child: Text(
-                  "3hr 10min . 20 Songs ",
-                  style: AppStyles.mRegular14(context)
-                      .copyWith(color: AppColors.whiteColor),
-                ),
-              ),
               const SizedBox(
                 height: 20,
               )
@@ -70,3 +65,9 @@ class VideoCard extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+

@@ -15,6 +15,15 @@ static TextStyle mRegular16(context){
   );
 }
 
+static TextStyle mRegular18(context){
+  return  TextStyle(
+    color: const Color(0xFF100F11),
+    fontSize: getResponsiveFontSize(context,fontSize: 18),
+    fontFamily: FontConstants.manropeFontsFamily,
+    fontWeight: FontWeightManger.regular,
+  );
+}
+
 static TextStyle mRegular14(context){
   return  TextStyle(
     color: const Color(0xFF100F11),
@@ -51,7 +60,18 @@ static TextStyle mSemiBold20(context){
     fontWeight: FontWeightManger.semiBold,
   );
 
-}static TextStyle mBold26(context){
+
+
+}
+static TextStyle mSemiBold22(context){
+  return  TextStyle(
+    color: Colors.black,
+    fontSize: getResponsiveFontSize(context,fontSize: 22),
+    fontFamily: FontConstants.manropeFontsFamily,
+    fontWeight: FontWeightManger.semiBold,
+  );}
+
+static TextStyle mBold26(context){
   return  TextStyle(
     color: Colors.black,
     fontSize: getResponsiveFontSize(context,fontSize: 26),

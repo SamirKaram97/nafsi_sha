@@ -1,11 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gp_nafsi/screens/preferences/cubit/preferences_cubit.dart';
 import 'package:gp_nafsi/screens/preferences/cubit/preferences_states.dart';
 import 'package:gp_nafsi/shared/styles/images.dart';
+import 'package:gp_nafsi/shared/utils/states_handler.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../../shared/styles/colors.dart';
 import '../../shared/styles/styles.dart';
 import '../../shared/utils/strings.dart';
@@ -19,7 +21,9 @@ class PreferencesScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => PreferencesCubit(),
         child: BlocConsumer<PreferencesCubit, PreferencesStates>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            StatesHandler.handleUpdatePreferencesStates(state, context);
+          },
           builder: (context, state) {
             return Scaffold(
               backgroundColor: AppColors.whiteColor,
@@ -32,7 +36,7 @@ class PreferencesScreen extends StatelessWidget {
                     SvgPicture.asset(Assets.imagesLogo),
                     const Spacer(),
                     Text(
-                      S.of(context).selectYourFavourits,
+                      AppStrings.selectYourFavourits.tr(),
                       style: AppStyles.mSemiBold38(context),
                       textAlign: TextAlign.center,
                     ),
@@ -45,10 +49,11 @@ class PreferencesScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     CustomButton(
-                        title: S.of(context).saveAndContinue,
+                        title: state is UpdatePreferencesLoadingState
+                        ? null:AppStrings.saveAndContinue.tr().toUpperCase(),
                         onPressed: () {
                           PreferencesCubit.get(context)
-                              .saveAndContinueButton(context);
+                              .updatePreferences(context);
                         }),
                     const SizedBox(
                       height: 50,

@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../styles/styles.dart';
 import '../utils/strings.dart';
 
@@ -25,7 +26,7 @@ class LoadMoreButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  S.of(context).loadMore,
+                  AppStrings.loadMore.tr(),
                   style: AppStyles.mMedium12(context),
                 ),
                 const Icon(Icons.add)

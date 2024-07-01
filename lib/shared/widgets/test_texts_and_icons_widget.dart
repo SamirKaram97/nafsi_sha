@@ -1,14 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../models/test_model.dart';
 import '../styles/colors.dart';
 import '../styles/images.dart';
 import '../styles/styles.dart';
 import '../utils/strings.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 
 class TestTextsAndIconsWidget extends StatelessWidget {
-  const TestTextsAndIconsWidget({super.key});
+  const TestTextsAndIconsWidget({super.key, required this.testModel});
+  final TestModel testModel;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +22,21 @@ class TestTextsAndIconsWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Anxiety Test",
-                  style:
-                      AppStyles.mBold14(context).copyWith(color: Colors.black),
-                ),
-                const Spacer(),
-                SvgPicture.asset(Assets.imagesBookMarkIcon)
-              ],
+            Text(
+              testModel.title,
+              style:
+              AppStyles.mBold14(context).copyWith(color: Colors.black),
             ),
             Expanded(
                 child: Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+              testModel.description,
               style: AppStyles.mMedium12(context),
+                  overflow: TextOverflow.fade,
             )),
             Row(
               children: [
                 Text(
-                  S.of(context).start,
+                  AppStrings.start.tr(),
                   style: AppStyles.mBold12(context),
                 ),
                 const Spacer(),

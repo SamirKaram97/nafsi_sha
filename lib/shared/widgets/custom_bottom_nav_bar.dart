@@ -36,12 +36,15 @@ class CustomBottomNavBar extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                LayoutCubit.get(context).items(context)[index].title,
-                style: LayoutCubit.get(context).currentIndex == index
-                    ? AppStyles.mSemiBold12(context)
-                        .copyWith(color: AppColors.primaryColor)
-                    : AppStyles.mSemiBold12(context),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  LayoutCubit.get(context).items(context)[index].title,
+                  style: LayoutCubit.get(context).currentIndex == index
+                      ? AppStyles.mSemiBold12(context)
+                          .copyWith(color: AppColors.primaryColor)
+                      : AppStyles.mSemiBold12(context),
+                ),
               ),
             ],
           );

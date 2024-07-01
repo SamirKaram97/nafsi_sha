@@ -24,6 +24,7 @@ mixin _$ArticleModel {
   String? get sId => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  String? get cover => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'publish_date')
   String? get publishDate => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $ArticleModelCopyWith<$Res> {
       {@JsonKey(name: '_id') String? sId,
       String? title,
       String? content,
+      String? cover,
       List<String>? tags,
       @JsonKey(name: 'publish_date') String? publishDate,
       @JsonKey(name: 'publish_by') String? publishBy,
@@ -72,6 +74,7 @@ class _$ArticleModelCopyWithImpl<$Res, $Val extends ArticleModel>
     Object? sId = freezed,
     Object? title = freezed,
     Object? content = freezed,
+    Object? cover = freezed,
     Object? tags = freezed,
     Object? publishDate = freezed,
     Object? publishBy = freezed,
@@ -90,6 +93,10 @@ class _$ArticleModelCopyWithImpl<$Res, $Val extends ArticleModel>
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cover: freezed == cover
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
               as String?,
       tags: freezed == tags
           ? _value.tags
@@ -127,6 +134,7 @@ abstract class _$$ArticleModelImplCopyWith<$Res>
       {@JsonKey(name: '_id') String? sId,
       String? title,
       String? content,
+      String? cover,
       List<String>? tags,
       @JsonKey(name: 'publish_date') String? publishDate,
       @JsonKey(name: 'publish_by') String? publishBy,
@@ -148,6 +156,7 @@ class __$$ArticleModelImplCopyWithImpl<$Res>
     Object? sId = freezed,
     Object? title = freezed,
     Object? content = freezed,
+    Object? cover = freezed,
     Object? tags = freezed,
     Object? publishDate = freezed,
     Object? publishBy = freezed,
@@ -166,6 +175,10 @@ class __$$ArticleModelImplCopyWithImpl<$Res>
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cover: freezed == cover
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
               as String?,
       tags: freezed == tags
           ? _value._tags
@@ -198,6 +211,7 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
       {@JsonKey(name: '_id') this.sId,
       this.title,
       this.content,
+      this.cover,
       final List<String>? tags,
       @JsonKey(name: 'publish_date') this.publishDate,
       @JsonKey(name: 'publish_by') this.publishBy,
@@ -215,6 +229,8 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
   final String? title;
   @override
   final String? content;
+  @override
+  final String? cover;
   final List<String>? _tags;
   @override
   List<String>? get tags {
@@ -239,7 +255,7 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ArticleModel(sId: $sId, title: $title, content: $content, tags: $tags, publishDate: $publishDate, publishBy: $publishBy, isPublished: $isPublished, iV: $iV)';
+    return 'ArticleModel(sId: $sId, title: $title, content: $content, cover: $cover, tags: $tags, publishDate: $publishDate, publishBy: $publishBy, isPublished: $isPublished, iV: $iV)';
   }
 
   @override
@@ -250,6 +266,7 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
       ..add(DiagnosticsProperty('sId', sId))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('cover', cover))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('publishDate', publishDate))
       ..add(DiagnosticsProperty('publishBy', publishBy))
@@ -265,6 +282,7 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
             (identical(other.sId, sId) || other.sId == sId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.cover, cover) || other.cover == cover) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.publishDate, publishDate) ||
                 other.publishDate == publishDate) &&
@@ -282,6 +300,7 @@ class _$ArticleModelImpl with DiagnosticableTreeMixin implements _ArticleModel {
       sId,
       title,
       content,
+      cover,
       const DeepCollectionEquality().hash(_tags),
       publishDate,
       publishBy,
@@ -307,6 +326,7 @@ abstract class _ArticleModel implements ArticleModel {
       {@JsonKey(name: '_id') final String? sId,
       final String? title,
       final String? content,
+      final String? cover,
       final List<String>? tags,
       @JsonKey(name: 'publish_date') final String? publishDate,
       @JsonKey(name: 'publish_by') final String? publishBy,
@@ -323,6 +343,8 @@ abstract class _ArticleModel implements ArticleModel {
   String? get title;
   @override
   String? get content;
+  @override
+  String? get cover;
   @override
   List<String>? get tags;
   @override

@@ -1,8 +1,15 @@
 class MessageModel
 {
-  final String id;
   final String content;
-  final String senderId;
+  final String type;
 
-  MessageModel({required this.id, required this.content, required this.senderId});
+  MessageModel({required this.content, required this.type});
+
+  factory MessageModel.fromJson(Map<String, dynamic> json) {
+    return MessageModel(
+        content: json['data']["content"],
+        type: json["type"]);
+  }
+
+
 }

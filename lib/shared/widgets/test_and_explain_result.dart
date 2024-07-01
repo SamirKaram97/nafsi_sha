@@ -1,18 +1,40 @@
 import 'package:flutter/material.dart';
 
+import '../../models/test_model.dart';
+import '../styles/colors.dart';
 import '../styles/styles.dart';
 
 class TestAndExplainResult extends StatelessWidget {
-  const TestAndExplainResult({super.key});
+  const TestAndExplainResult({super.key, required this.score});
+  final TestScoreModel score;
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-        Text("Lorem ipsum dolor sit amet ",style: AppStyles.mExtraBold35(context),),
-        Text(longLorem,style: AppStyles.mMedium16(context),),
+        FittedBox(
+          child: Text(
+            score.name,
+            style: AppStyles.mExtraBold35(context),
+          ),
+        ),
+       ListView.separated(physics: const NeverScrollableScrollPhysics(),shrinkWrap: true,itemBuilder: (context, index) =>  Row(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           const Padding(
+             padding: EdgeInsets.all(4.0),
+             child: CircleAvatar(radius: 5,backgroundColor: AppColors.primaryColor,),
+           ),
+           Expanded(
+             child: Text(
+               score.suggestions[index],
+               style: AppStyles.mMedium16(context),
+             ),
+           ),
+         ],
+       ), separatorBuilder: (context, index) => const SizedBox(height: 8,), itemCount: score.suggestions.length),
       ],
     );
   }
-  final String longLorem="Lorem ipsum dolor sit amet consectetur. Libero vitae erat donec sed gravida ac facilisi. Euismod dui eget ut egestas. Sit nibh id aliquam suspendisse rhoncus auctor. Sed etiam platea faucibus id ac.Id risus vivamus facilisi pellentesque velit pulvinar suspendisse nunc. Massa viverra scelerisque ut enim mattis nec sed. Dis sapien non pellentesque nunc malesuada pharetra faucibus molestie. Pellentesque imperdiet risus nulla non elementum venenatis. Fringilla condimentum eu feugiat amet. Ultricies morbi convallis dolor sed risus dui. Ac euismod orci dolor tristique metus pretium. Mi fermentum morbi vel enim nunc sapien. Ut elementum nec at est convallis mi ac blandit. Aliquet non nam faucibus diam neque. Gravida cras amet maecenas accumsan non quis ipsum tempor. Tellus scelerisque quam morbi viverra donec laoreet amet tincidunt. Lacus in integer enim amet quis luctus. Pharetra nibh dui in purus eget donec viverra nulla vitae. Eu id viverra amet eu amet leo ";
+
 }

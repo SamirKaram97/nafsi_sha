@@ -1,4 +1,5 @@
 import 'package:gp_nafsi/models/article_models.dart';
+import 'package:gp_nafsi/models/video_response.dart';
 import 'package:gp_nafsi/shared/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,6 +25,15 @@ class SharedHelper
     }
   }
 
+  static Future<void> saveIsDataCompleted()async
+  {
+      await pref!.setBool(Constants.dataCompletedSharedKey, true);
+  }
+  static bool getIsDataCompleted()
+  {
+    return pref!.getBool(Constants.dataCompletedSharedKey)??false;
+  }
+
   static Future<void> saveLanguage(String language)async
   {
 
@@ -45,6 +55,32 @@ class SharedHelper
     String articles=  pref!.getString(Constants.favouriteArticlesSharedToken)??"[]";
     return ArticleModel.decode(articles);
   }
+
+
+  static Future<void> saveFavouriteVideos(List<VideoResponse> videos)async
+  {
+    pref!.setString(Constants.favouriteVideosSharedToken, VideoResponse.encode(videos));
+  }
+
+  static List<VideoResponse> getFavouriteVideos()
+  {
+    String videos=  pref!.getString(Constants.favouriteVideosSharedToken)??"[]";
+    return VideoResponse.decode(videos);
+  }
+
+
+  static Future<void> cacheVideos(List<VideoResponse> videos)
+  async {
+    pref!.setString(Constants.cacheVideosSharedToken, VideoResponse.encode(videos));
+  }
+
+  static List<VideoResponse> getCacheVideos()
+  {
+    String videos=  pref!.getString(Constants.cacheVideosSharedToken)??"[]";
+    return VideoResponse.decode(videos);
+  }
+
+
 
 
 

@@ -1,10 +1,11 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
-
-import '../../../generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../models/article_models.dart';
 import '../../../shared/network/local/shared_helper.dart';
+import '../../../shared/utils/strings.dart';
 import 'article_state.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
@@ -54,13 +55,15 @@ class ArticlesCubit extends Cubit<ArticlesState> {
             (await ApiServices.getArticle()).articleModelList;
         emit(GetArticlesSuccessState(articles: articles));
       } catch (e) {
+        print(e.toString());
         showToast(state: ToastState.WARNING,
             text: "Error while loading articles.. loading the local articles");
         emit(GetArticlesErrorState(errorMessage: ApiServices.getErrorMessage(e, context)));
       }
     }
     else {
-      emit(GetArticlesErrorState(errorMessage: S.of(context).networkError));
+      print("Network problem");
+      emit(GetArticlesErrorState(errorMessage: AppStrings.networkError.tr()));
     }
     }
 
@@ -68,7 +71,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   late List<ArticleModel> favouriteArticles;
 
 
-  void getSavedArticles()
+  void getFavouriteArticles()
   {
     favouriteArticles=SharedHelper.getFavouriteArticles();
     print(favouriteArticles.length);

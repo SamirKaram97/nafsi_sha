@@ -9,6 +9,7 @@ part of 'video_response.dart';
 _$VideoResponseImpl _$$VideoResponseImplFromJson(Map<String, dynamic> json) =>
     _$VideoResponseImpl(
       title: json['title'] as String?,
+      imageLink: json['imageLink'] as String?,
       videoLink: json['videolink'] as String?,
       videoId: json['videoId'] as String?,
     );
@@ -16,6 +17,7 @@ _$VideoResponseImpl _$$VideoResponseImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$VideoResponseImplToJson(_$VideoResponseImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
+      'imageLink': instance.imageLink,
       'videolink': instance.videoLink,
       'videoId': instance.videoId,
     };

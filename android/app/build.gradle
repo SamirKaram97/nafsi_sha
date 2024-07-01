@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "sha.gpnafsi.gp_nafsi"
-    compileSdkVersion 31
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

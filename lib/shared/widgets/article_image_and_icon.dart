@@ -9,11 +9,13 @@ import 'package:gp_nafsi/shared/styles/colors.dart';
 import '../styles/images.dart';
 
 class ArticleImageAndIcon extends StatelessWidget {
-   const ArticleImageAndIcon({
+    ArticleImageAndIcon({
     super.key, required this.tag, required this.articleModel,
+     this.inContentPage
   });
   final String tag;
   final ArticleModel articleModel;
+  bool? inContentPage;
   @override
   Widget build(BuildContext context) {
     bool isFavouritesContainArticle=ArticlesCubit.get(context).isFavouritesContainArticle(articleModel);
@@ -25,11 +27,11 @@ class ArticleImageAndIcon extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.0),
-            image: const DecorationImage(image: AssetImage(Assets.imagesArticleImage)),
+            image: articleModel.cover==null?const DecorationImage(image: AssetImage(Assets.imagesArticleImage)): DecorationImage(image: NetworkImage(articleModel.cover!),fit: BoxFit.cover),
           ),
           child: Padding(
             padding: const EdgeInsets.all(7.0),
-            child: Align(alignment: AlignmentDirectional.topEnd,child: GestureDetector(onTap: (){
+            child: inContentPage==true?null:Align(alignment: AlignmentDirectional.topEnd,child: GestureDetector(onTap: (){
               ArticlesCubit.get(context).addOrRemoveArticleFavourites(articleModel);
             },child: CircleAvatar(backgroundColor: isFavouritesContainArticle?AppColors.primaryColor:const Color(0XFFFEFEFE).withOpacity(.2),child: SvgPicture.asset(Assets.imagesBookMarkIcon,color: isFavouritesContainArticle?AppColors.whiteColor:null,)))),
           ),

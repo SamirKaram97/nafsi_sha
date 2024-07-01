@@ -6,5 +6,9 @@ class SoundModel
 
   SoundModel({required this.name, required this.url, required this.coverUrl});
 
-
-}
+  factory SoundModel.fromJson(Map<String, dynamic> json) {
+    return SoundModel(
+        name: json['title'],
+        url: json['preview'],
+        coverUrl: json["artist"]['picture_medium']);
+}}

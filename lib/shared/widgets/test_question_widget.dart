@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:gp_nafsi/shared/widgets/test_question_answer_selection.dart';
 
+import '../../models/test_model.dart';
 import '../styles/styles.dart';
 
 class TestQuestionWidget extends StatelessWidget {
   const TestQuestionWidget({
-    super.key,
+    super.key, required this.question, required this.answers, required this.qIndex, required this.testIndex,
+
   });
+  final String question;
+  final List<String> answers;
+  final int qIndex;
+  final int testIndex;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("Lorem ipsum dolor sit amet consectetur. Dolor ac risus id consequat sit ",style: AppStyles.mBold22(context),textAlign: TextAlign.center,),
+        Text(question,style: AppStyles.mBold22(context),textAlign: TextAlign.center,),
         const SizedBox(height: 20,),
-        const TestQuestionAnswerSelection(),
+        TestQuestionAnswerSelection(answers: answers,qIndex:qIndex,testIndex: testIndex),
       ],
     );
   }

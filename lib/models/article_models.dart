@@ -16,9 +16,9 @@ class ArticleModel with _$ArticleModel
 
     String? title,
 
-
     String? content,
 
+    String? cover,
 
     List<String>? tags,
 
@@ -27,7 +27,6 @@ class ArticleModel with _$ArticleModel
 
     @JsonKey(name: 'publish_by')
     String? publishBy,
-
 
     bool? isPublished,
 

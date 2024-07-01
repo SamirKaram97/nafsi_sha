@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
@@ -5,8 +6,8 @@ import 'package:gp_nafsi/screens/articles/cubit/article_cubit.dart';
 import 'package:gp_nafsi/screens/articles/cubit/article_state.dart';
 import 'package:gp_nafsi/shared/widgets/load_more_button.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
-import '../../models/article_models.dart';
+import 'package:gp_nafsi/shared/widgets/shimmer_article_card.dart';
+
 import '../utils/strings.dart';
 import 'article_card.dart';
 
@@ -20,41 +21,31 @@ class ArticlesSection extends StatelessWidget {
     return BlocConsumer<ArticlesCubit, ArticlesState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var articles=ArticlesCubit.get(context).articles;
-        if (state is GetArticlesLoadingState) {
-          return const CircularProgressIndicator();
-        } else if (articles!=null) {
+        var articles = ArticlesCubit.get(context).articles;
+
+        if (state is GetArticlesErrorState) {
+          return Center(child: Text(state.errorMessage));
+        } else {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SectionTitle(
-                title: S.of(context).articles,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ArticleCard(
-                articleModel: articles[0]!,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              // const ArticleCard(),
-              const SizedBox(
-                height: 15,
-              ),
-              LoadMoreButton(
-                onTab: () {
-                  LayoutCubit.get(context).changeBottomNavBarIndex(5, context);
-                },
-              )
+              SectionTitle(title: AppStrings.articles.tr()),
+
+              //space
+              const SizedBox(height: 15),
+              articles == null
+                  ? const ShimmerArticleCard():
+              articles.isEmpty?const SizedBox()
+                  : ArticleCard(articleModel: articles[0]!),
+
+              //space
+              const SizedBox(height: 15),
+              LoadMoreButton(onTab: () {
+                LayoutCubit.get(context).changeBottomNavBarIndex(5, context);
+              })
             ],
           );
         }
-        else if(state is GetArticlesErrorState)
-          {
-            return Center(child: Text(state.errorMessage,));
-          }
         return const SizedBox();
       },
     );

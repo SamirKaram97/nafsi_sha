@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gp_nafsi/models/article_models.dart';
@@ -5,7 +6,8 @@ import 'package:gp_nafsi/screens/article_content/article_content_screen.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/shadow_box.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+import 'package:shimmer/shimmer.dart';
+
 import '../styles/images.dart';
 import 'article_image_and_icon.dart';
 
@@ -40,7 +42,7 @@ class ArticleCard extends StatelessWidget {
               ),
               Text(
                 articleModel.content ?? "",
-                style: AppStyles.mMedium12(context)
+                style: AppStyles.mMedium14(context)
                     .copyWith(color: Colors.black.withOpacity(0.75)),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -51,7 +53,7 @@ class ArticleCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    S.of(context).readMore,
+                    AppStrings.readMore.tr(),
                     style: AppStyles.mBold12(context),
                   ),
                   const Spacer(),
@@ -63,3 +65,6 @@ class ArticleCard extends StatelessWidget {
     );
   }
 }
+
+
+

@@ -1,13 +1,16 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/models/user_model.dart';
 import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
 import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../../../shared/network/remote/firebase_services.dart';
 import '../../../shared/styles/components.dart';
 import '../../../shared/utils/strings.dart';
@@ -22,6 +25,7 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isPasswordShown = false;
+  String? faceId;
 
   void changePasswordVisibility() {
     isPasswordShown = !isPasswordShown;
@@ -41,23 +45,19 @@ class LoginCubit extends Cubit<LoginStates> {
             errorMessage: ApiServices.getErrorMessage(error, context)));
       }
     } else {
-      emit(LoginErrorState(errorMessage: S.of(context).networkError));
+      emit(LoginErrorState(errorMessage: AppStrings.networkError.tr()));
     }
   }
 
   void userLoginGoogle(context) async {
+    emit(LoginLoadingState());
     if (await _internetConnectionChecker.hasConnection) {
       try {
         UserCredential? userCredential =
             await FirebaseServices.signInWithGoogle();
         if (userCredential != null) {
-          log(userCredential.user?.uid ?? "uid null");
-          log(userCredential.user?.uid ?? "");
-          log(userCredential.user?.email ?? "");
-          emit(LoginGoogleSuccessState());
-          login(context, userCredential.user!.email!,
-              "P@${userCredential.user!.uid}");
-
+          UserModel userModel=await ApiServices.loginGoogleFacebook(userCredential.user!.email!,userCredential.user!.uid);
+          emit(LoginSuccessState(userModel: userModel));
         } else {
           emit(LoginGoogleCancelledState());
         }
@@ -68,15 +68,12 @@ class LoginCubit extends Cubit<LoginStates> {
         emit(LoginGoogleErrorState(errorMessage:FirebaseServices.getRegisterMessageFromErrorCode(error.code)));
       } catch (e) {
         log(e.toString());
-        showToast(
-            state: ToastState.EROOR, text: S.of(context).someThingWentWrong);
-        print(e.toString());
-        emit(LoginGoogleErrorState(
-            errorMessage: S.of(context).someThingWentWrong));
+        emit(LoginErrorState(
+            errorMessage: ApiServices.getErrorMessage(e, context)));
       }
     } else {
-      emit(LoginGoogleErrorState(errorMessage: S.of(context).networkError));
-      showToast(state: ToastState.EROOR, text: S.of(context).networkError);
+      emit(LoginErrorState(errorMessage: AppStrings.networkError.tr()));
+
     }
   }
 
@@ -87,8 +84,8 @@ class LoginCubit extends Cubit<LoginStates> {
         UserCredential? userCredential =
             await FirebaseServices.signInWithFacebook();
         if (userCredential != null) {
-          login(context, userCredential.user!.email!,
-              "P@${userCredential.user!.uid}");
+          UserModel userModel=await ApiServices.loginGoogleFacebook(userCredential.user!.email!,userCredential.user!.uid);
+          emit(LoginSuccessState(userModel: userModel));
         } else {
           emit(LoginFacBookCancelledState());
         }
@@ -99,14 +96,43 @@ class LoginCubit extends Cubit<LoginStates> {
         emit(LoginFacebookErrorState(errorMessage:FirebaseServices.getRegisterMessageFromErrorCode(error.code)));}
       catch (e) {
         log(e.toString());
-        showToast(
-            state: ToastState.EROOR, text: S.of(context).someThingWentWrong);
-        emit(LoginFacebookErrorState(
-            errorMessage: S.of(context).someThingWentWrong));
+        emit(LoginErrorState(
+            errorMessage: ApiServices.getErrorMessage(e, context)));
       }
     } else {
-      emit(LoginFacebookErrorState(errorMessage: S.of(context).networkError));
-      showToast(state: ToastState.EROOR, text: S.of(context).networkError);
+      emit(LoginErrorState(errorMessage: AppStrings.networkError.tr()));
     }
+  }
+
+
+  void userLoginFaceId(context)async
+  {
+    emit(LoginLoadingState());
+    if (await _internetConnectionChecker.hasConnection) {
+      try {
+        late UserModel userModel;
+        userModel = await ApiServices.loginFaceId("8c900a1750624e298d018b5ca7150d31fioaa653");
+        emit(LoginSuccessState(userModel: userModel));
+      } catch (error) {
+        emit(LoginErrorState(
+            errorMessage: ApiServices.getErrorMessage(error, context)));
+        print(error.toString());
+      }
+    } else {
+      emit(LoginErrorState(errorMessage: AppStrings.networkError.tr()));
+    }
+  }
+
+  void getSaveFaceId(String faceId)
+  {
+    faceId=faceId;
+    emit(GetFaceIdSuccess());
+  }
+
+
+  Future<File> pickImage() async {
+    final picker = ImagePicker();
+    var pickedFile = await picker.pickImage(source: ImageSource.camera);
+    return File(pickedFile!.path);
   }
 }

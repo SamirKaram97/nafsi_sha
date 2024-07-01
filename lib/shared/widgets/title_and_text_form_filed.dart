@@ -1,21 +1,24 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/styles.dart';
 import '../utils/strings.dart';
 import 'custom_text_form_filed.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 
 class TitleAndTextFormFiled extends StatelessWidget {
   const TitleAndTextFormFiled({
     super.key,
     required this.title,
     required this.controller,
-    required this.cubit,
+    this.value, this.textInputType,
   });
 
   final TextEditingController controller;
   final String title;
-  final cubit;
+  final TextInputType? textInputType;
+
+  final String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +29,11 @@ class TitleAndTextFormFiled extends StatelessWidget {
           title,
           style: AppStyles.mSemiBold18(context),
         ),
-        title == S.of(context).password
-            ? CustomPasswordTextFormFiled(controller: controller, cubit: cubit)
+        title == AppStrings.password.tr()||title == AppStrings.confirmPassword.tr()||title==AppStrings.newPassword .tr()
+            ? CustomPasswordTextFormFiled(controller: controller,value: value,textInputType: textInputType,title: title,)
             : CustomTextFormFiled(
+          textInputType: textInputType,title: title,
+          value: value,
                 controller: controller,
               ),
       ],

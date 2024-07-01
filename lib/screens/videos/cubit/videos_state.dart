@@ -6,6 +6,9 @@ abstract class VideosState{}
 
 class GetVideosLoadingState extends VideosState{}
 
+class AddVideoToFavourites extends VideosState{}
+class RemoveVideoToFavourites extends VideosState{}
+
 class GetVideosErrorState extends VideosState{
   final String errorMessage;
 

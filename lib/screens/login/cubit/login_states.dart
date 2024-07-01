@@ -24,7 +24,8 @@ class LoginErrorState extends LoginStates{
 class LoginGoogleLoadingState extends LoginStates{}
 class LoginGoogleCancelledState extends LoginStates{}
 class LoginGoogleSuccessState extends LoginStates{
-  LoginGoogleSuccessState();
+  final UserModel userModel;
+  LoginGoogleSuccessState(this.userModel);
 }
 class LoginGoogleErrorState extends LoginStates{
   final String errorMessage;
@@ -47,7 +48,18 @@ class LoginFacebookErrorState extends LoginStates{
 }
 
 
+class LoginGetFaceIdSuccessState extends LoginStates{
+  final String faceId;
 
+  LoginGetFaceIdSuccessState({required this.faceId});
+}
+
+class LoginGetFaceIdCanceledState extends LoginStates{}
+
+class LoginGetFaceIdErrorState extends LoginStates{}
+
+
+class GetFaceIdSuccess extends LoginStates{}
 
 
 class LoginInternetErrorState extends LoginStates{}

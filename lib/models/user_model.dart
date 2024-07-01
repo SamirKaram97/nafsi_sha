@@ -8,6 +8,7 @@ class UserModel {
   final List<dynamic> mood;
   final List<String> keywords;
   late String? token;
+  late String? profileImage;
 
   UserModel({
     required this.id,
@@ -17,7 +18,8 @@ class UserModel {
     required this.age,
     required this.preferance,
     required this.keywords,
-    required this.mood
+    required this.mood,
+    required this.profileImage
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,21 @@ class UserModel {
         keywords: List.castFrom<dynamic, String>(json['keywords']),
         preferance: List.castFrom<dynamic, dynamic>(json['preferance']),
         mood:  List.castFrom<dynamic, dynamic>(json['moood']),
-        lName: json['lastname']);
+        lName: json['lastname'],
+      profileImage: json['profileimage']);
+  }
+}
+
+class UserUpdateModel
+{
+  final String fName;
+  final String lName;
+  final int age;
+
+  UserUpdateModel({required this.fName, required this.lName, required this.age});
+
+  Map<String,dynamic> toJson()
+  {
+    return {"firstname":fName,"lastname":lName,"age":age};
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +10,9 @@ import 'package:gp_nafsi/shared/utils/states_handler.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/divder_with_or_section.dart';
 import 'package:gp_nafsi/shared/widgets/login_and_register_title.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../../shared/widgets/custom_button.dart';
+import '../../shared/widgets/language_button.dart';
 import '../../shared/widgets/social_media_buttons.dart';
 import '../../shared/widgets/title_and_text_form_filed.dart';
 import 'cubit/register_cubit.dart';
@@ -37,50 +39,72 @@ class RegisterScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: SizedBox(
                   width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height-MediaQuery.of(context).viewPadding.top-MediaQuery.of(context).viewPadding.bottom,
+                  height: MediaQuery.sizeOf(context).height -
+                      MediaQuery.of(context).viewPadding.top -
+                      MediaQuery.of(context).viewPadding.bottom,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 26.0),
                     child: Form(
                       key: formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Spacer(),
-                          SvgPicture.asset(Assets.imagesLogo),
-                          const Spacer(),
-                          LoginAndRegisterTitle(
-                            title: S.of(context).signUpToStartWithNafsy,
+                          const SizedBox(
+                            height: 10,
                           ),
-                          const Spacer(),
+                          const Align(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: LanguageButton()),
+
+                          Flexible(child: SvgPicture.asset(Assets.imagesLogo)),
+
+                          LoginAndRegisterTitle(
+                            title: AppStrings.signUpToStartWithNafsy.tr(),
+                          ),
+
                           TitleAndTextFormFiled(
-                              cubit: registerCubit,
-                              title: S.of(context).email,
+
+                              title: AppStrings.email.tr(),
+                              textInputType: TextInputType.emailAddress,
                               controller: registerCubit.emailController),
-                          const Spacer(),
+
                           TitleAndTextFormFiled(
-                              cubit: registerCubit,
-                              title: S.of(context).password,
+
+                              title: AppStrings.password.tr(),
                               controller: registerCubit.passwordController),
-                          const Spacer(),
+
+                          TitleAndTextFormFiled(
+
+                              title: AppStrings.confirmPassword.tr(),
+                              controller: registerCubit.cPasswordController),
+
                           CustomButton(
                               title: state is RegisterLoadingState
                                   ? null
-                                  : S.of(context).createMyAccount,
+                                  : AppStrings.createMyAccount.tr(),
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  registerCubit.register(context,registerCubit.emailController.text,registerCubit.passwordController.text);
+                                  registerCubit.register(
+                                      context,
+                                      registerCubit.emailController.text,
+                                      registerCubit.passwordController.text);
                                 }
                               }),
-                          const Spacer(),
+
                           const DividerWithOrSection(),
-                          const Spacer(),
-                           SocialMediaButtons(googleOnPressed:()=> registerCubit.userRegisterGoogle(context),facebookOnPressed: ()=>registerCubit.userRegisterFace(context)),
-                          const Spacer(),
+
+                          SocialMediaButtons(
+                              googleOnPressed: () =>
+                                  registerCubit.userRegisterGoogle(context),
+                              facebookOnPressed: () =>
+                                  registerCubit.userRegisterFace(context)),
+
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                S.of(context).alreadyHaveAnAccount,
+                                AppStrings.alreadyHaveAnAccount.tr(),
                                 style: AppStyles.mRegular16(context),
                               ),
                               InkWell(
@@ -91,7 +115,7 @@ class RegisterScreen extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 5),
                                   child: Text(
-                                    S.of(context).signIn.toTitleCase(),
+                                    AppStrings.signIn.tr().toUpperCase(),
                                     style: AppStyles.mRegular16(context)
                                         .copyWith(
                                             color: AppColors.primaryColor),

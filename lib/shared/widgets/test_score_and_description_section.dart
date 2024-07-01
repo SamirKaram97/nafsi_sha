@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gp_nafsi/screens/tests/cubit/tests_cubit.dart';
 import 'package:gp_nafsi/shared/widgets/test_score_slider.dart';
 
+import '../styles/colors.dart';
 import '../styles/styles.dart';
 import 'description_box.dart';
 
 class TestScoreAndDescriptionSection extends StatelessWidget {
-  const TestScoreAndDescriptionSection({super.key});
-
+  const TestScoreAndDescriptionSection({super.key, required this.finalScore, required this.testIndex});
+  final int finalScore;
+  final int testIndex;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +26,7 @@ class TestScoreAndDescriptionSection extends StatelessWidget {
           FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
-                "Depression Test Score",
+                TestsCubit.get(context).tests[testIndex].title,
                 style: AppStyles.mBold26(context),
               )),
 
@@ -33,7 +36,13 @@ class TestScoreAndDescriptionSection extends StatelessWidget {
           ),
 
           //TestScoreSlider
-          const TestScoreSlider(),
+            TestScoreSlider(finalScore: finalScore,testIndex: testIndex),
+          // min and max value
+          // Row(children: [
+          //   Text("0",style: AppStyles.mBold18(context).copyWith(color: AppColors.primaryColor),),
+          //   const Spacer(),
+          //   Text("100",style: AppStyles.mBold18(context).copyWith(color: AppColors.primaryColor)),
+          // ],),
 
           //space
           const SizedBox(
@@ -41,7 +50,7 @@ class TestScoreAndDescriptionSection extends StatelessWidget {
           ),
 
           //description Box
-          const DescriptionBox()
+           DescriptionBox(testIndex: testIndex)
         ],
       ),
     );

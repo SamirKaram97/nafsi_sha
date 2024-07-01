@@ -42,7 +42,7 @@ class MusicPlayerScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(14.0),
                                   child: CachedNetworkImage(
                                     width: double.infinity,
-                                    imageUrl: cubit.sounds[cubit.currentSound].coverUrl,
+                                    imageUrl: cubit.sounds![cubit.currentSound].coverUrl,
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder: (context, url, downloadProgress) =>
                                         CircularProgressIndicator(value: downloadProgress.progress),
@@ -54,7 +54,7 @@ class MusicPlayerScreen extends StatelessWidget {
                                 height: 30,
                               ),
                               Text(
-                                cubit.sounds[cubit.currentSound].name,
+                                cubit.sounds![cubit.currentSound].name,
                                 style: AppStyles.mBold26(context),
                               ),
                               const SizedBox(

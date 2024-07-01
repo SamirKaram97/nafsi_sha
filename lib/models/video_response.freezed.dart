@@ -21,6 +21,8 @@ VideoResponse _$VideoResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VideoResponse {
   String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'imageLink')
+  String? get imageLink => throw _privateConstructorUsedError;
   @JsonKey(name: 'videolink')
   String? get videoLink => throw _privateConstructorUsedError;
   @JsonKey(name: 'videoId')
@@ -40,6 +42,7 @@ abstract class $VideoResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {String? title,
+      @JsonKey(name: 'imageLink') String? imageLink,
       @JsonKey(name: 'videolink') String? videoLink,
       @JsonKey(name: 'videoId') String? videoId});
 }
@@ -58,6 +61,7 @@ class _$VideoResponseCopyWithImpl<$Res, $Val extends VideoResponse>
   @override
   $Res call({
     Object? title = freezed,
+    Object? imageLink = freezed,
     Object? videoLink = freezed,
     Object? videoId = freezed,
   }) {
@@ -65,6 +69,10 @@ class _$VideoResponseCopyWithImpl<$Res, $Val extends VideoResponse>
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageLink: freezed == imageLink
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
       videoLink: freezed == videoLink
           ? _value.videoLink
@@ -88,6 +96,7 @@ abstract class _$$VideoResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? title,
+      @JsonKey(name: 'imageLink') String? imageLink,
       @JsonKey(name: 'videolink') String? videoLink,
       @JsonKey(name: 'videoId') String? videoId});
 }
@@ -104,6 +113,7 @@ class __$$VideoResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = freezed,
+    Object? imageLink = freezed,
     Object? videoLink = freezed,
     Object? videoId = freezed,
   }) {
@@ -111,6 +121,10 @@ class __$$VideoResponseImplCopyWithImpl<$Res>
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageLink: freezed == imageLink
+          ? _value.imageLink
+          : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
       videoLink: freezed == videoLink
           ? _value.videoLink
@@ -131,6 +145,7 @@ class _$VideoResponseImpl
     implements _VideoResponse {
   const _$VideoResponseImpl(
       {this.title,
+      @JsonKey(name: 'imageLink') this.imageLink,
       @JsonKey(name: 'videolink') this.videoLink,
       @JsonKey(name: 'videoId') this.videoId});
 
@@ -140,6 +155,9 @@ class _$VideoResponseImpl
   @override
   final String? title;
   @override
+  @JsonKey(name: 'imageLink')
+  final String? imageLink;
+  @override
   @JsonKey(name: 'videolink')
   final String? videoLink;
   @override
@@ -148,7 +166,7 @@ class _$VideoResponseImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'VideoResponse(title: $title, videoLink: $videoLink, videoId: $videoId)';
+    return 'VideoResponse(title: $title, imageLink: $imageLink, videoLink: $videoLink, videoId: $videoId)';
   }
 
   @override
@@ -157,6 +175,7 @@ class _$VideoResponseImpl
     properties
       ..add(DiagnosticsProperty('type', 'VideoResponse'))
       ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('imageLink', imageLink))
       ..add(DiagnosticsProperty('videoLink', videoLink))
       ..add(DiagnosticsProperty('videoId', videoId));
   }
@@ -167,6 +186,8 @@ class _$VideoResponseImpl
         (other.runtimeType == runtimeType &&
             other is _$VideoResponseImpl &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.imageLink, imageLink) ||
+                other.imageLink == imageLink) &&
             (identical(other.videoLink, videoLink) ||
                 other.videoLink == videoLink) &&
             (identical(other.videoId, videoId) || other.videoId == videoId));
@@ -174,7 +195,8 @@ class _$VideoResponseImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, videoLink, videoId);
+  int get hashCode =>
+      Object.hash(runtimeType, title, imageLink, videoLink, videoId);
 
   @JsonKey(ignore: true)
   @override
@@ -193,6 +215,7 @@ class _$VideoResponseImpl
 abstract class _VideoResponse implements VideoResponse {
   const factory _VideoResponse(
       {final String? title,
+      @JsonKey(name: 'imageLink') final String? imageLink,
       @JsonKey(name: 'videolink') final String? videoLink,
       @JsonKey(name: 'videoId') final String? videoId}) = _$VideoResponseImpl;
 
@@ -201,6 +224,9 @@ abstract class _VideoResponse implements VideoResponse {
 
   @override
   String? get title;
+  @override
+  @JsonKey(name: 'imageLink')
+  String? get imageLink;
   @override
   @JsonKey(name: 'videolink')
   String? get videoLink;

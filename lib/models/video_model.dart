@@ -6,5 +6,3 @@ class VideoModel
 
   VideoModel({required this.link, required this.title, required this.subTitle});
 }
-
-

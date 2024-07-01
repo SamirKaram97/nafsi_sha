@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/screens/videos/cubit/videos_cubit.dart';
@@ -6,7 +7,7 @@ import 'package:gp_nafsi/screens/videos/cubit/videos_state.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:gp_nafsi/shared/widgets/video_card.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 
 class VideosScreen extends StatelessWidget {
   const VideosScreen({super.key});
@@ -26,7 +27,7 @@ class VideosScreen extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SectionTitle(title: S.of(context).videos),
+                SectionTitle(title: AppStrings.videos.tr()),
                 const SizedBox(
                   height: 15,
                 ),
@@ -60,7 +61,7 @@ class VideosScreen extends StatelessWidget {
         {return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SectionTitle(title: S.of(context).videos),
+            const SectionTitle(title: .tr()videos),
             const SizedBox(height: 15,),
             Expanded(child: ListView.separated(itemBuilder: (context, index) {
               return VideoCard(videoResponse: state.videos![index]!,);

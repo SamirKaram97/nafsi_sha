@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gp_nafsi/screens/register/cubit/register_cubit.dart';
+import 'package:gp_nafsi/screens/register/cubit/register_states.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 
@@ -15,18 +17,18 @@ class PreferenceSelectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PreferencesCubit, PreferencesStates>(
+    return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {
       },
       builder: (context, state) {
-        PreferencesCubit preferencesCubit=PreferencesCubit.get(context);
+        var registerCubit=RegisterCubit.get(context);
         return GestureDetector(
           onTap: () {
-            preferencesCubit.selectPreferenceItem(text);
+            registerCubit.selectPreferenceItem(text);
           },
           child: AnimatedContainer(
             decoration: ShapeDecoration(
-              color: preferencesCubit.selectedPreferencesList.contains(text)?AppColors.primaryColor:Colors.white,
+              color: registerCubit.selectedPreferencesList.contains(text)?AppColors.primaryColor:Colors.white,
               shape: RoundedRectangleBorder(
                 side: const BorderSide(
                   width: 1,
@@ -39,7 +41,7 @@ class PreferenceSelectionItem extends StatelessWidget {
             duration: const Duration(milliseconds: 500),
             child:  Padding(
               padding: const EdgeInsets.all(14.0),
-              child: Text(text,style:  preferencesCubit.selectedPreferencesList.contains(text)?AppStyles.mRegular16(context).copyWith(color: Colors.white):AppStyles.mRegular16(context),),
+              child: Text(text,style:  registerCubit.selectedPreferencesList.contains(text)?AppStyles.mRegular16(context).copyWith(color: Colors.white):AppStyles.mRegular16(context),),
             ),
           ),
         );

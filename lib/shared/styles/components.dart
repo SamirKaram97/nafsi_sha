@@ -2,7 +2,29 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+String convertSecondsToTime(int seconds) {
+   if(seconds==0) {
+     return "0";
+   }
+  int hours = seconds ~/ 3600;
+  int minutes = (seconds % 3600) ~/ 60;
+  int remainingSeconds = seconds % 60;
 
+  String hoursStr = hours.toString().padLeft(2, '0');
+  String minutesStr = minutes.toString().padLeft(2, '0');
+  String secondsStr = remainingSeconds.toString().padLeft(2, '0');
+  String result = "";
+  if (hours > 0) {
+    result = "${result + hours.toString()} h ";
+  }
+  if (minutes > 0) {
+    result = "${result + minutes.toString()} min ";
+  }
+  if (seconds > 0) {
+    result = "${result + remainingSeconds.toString()} sec";
+  }
+  return result;
+}
 
 void navTo(context, Widget widget) =>
     Navigator.push(context, MaterialPageRoute(builder: (context) => widget));

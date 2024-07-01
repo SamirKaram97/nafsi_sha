@@ -1,28 +1,32 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:gp_nafsi/screens/tests/cubit/tests_cubit.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:gp_nafsi/shared/widgets/custom_app_bar.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
-import 'package:gp_nafsi/generated/l10n.dart';
+
 import '../../shared/widgets/test_and_explain_result.dart';
 import '../../shared/widgets/test_score_and_description_section.dart';
 
 class TestResultScreen extends StatelessWidget {
-  const TestResultScreen({super.key});
+  const TestResultScreen({super.key, required this.finalScore, required this.testIndex});
+  final int finalScore;
+  final int testIndex;
 
   //need to refactor more and more
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: SafeArea(
           child: Column(
         children: [
-          CustomAppBar(
+          const CustomAppBar(
             deep: true,
             backButton: true,
           ),
-          Expanded(child: TestResultScreenBody()),
+          Expanded(child: TestResultScreenBody(finalScore: finalScore,testIndex: testIndex,)),
         ],
       )),
     );
@@ -30,8 +34,9 @@ class TestResultScreen extends StatelessWidget {
 }
 
 class TestResultScreenBody extends StatelessWidget {
-  const TestResultScreenBody({super.key});
-
+  const TestResultScreenBody({super.key, required this.finalScore, required this.testIndex});
+  final int finalScore;
+  final int testIndex;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -46,10 +51,12 @@ class TestResultScreenBody extends StatelessWidget {
             ),
 
             //head ready text
-            Text(
-              S.of(context).yourResultsAreReady,
-              style: AppStyles.mExtraBold50(context),
-              textAlign: TextAlign.center,
+            Center(
+              child: Text(
+                AppStrings.yourResultsAreReady.tr(),
+                style: AppStyles.mExtraBold50(context),
+                textAlign: TextAlign.center,
+              ),
             ),
 
             const SizedBox(
@@ -57,7 +64,7 @@ class TestResultScreenBody extends StatelessWidget {
             ),
 
             //TestScoreAndDescriptionSection
-            const TestScoreAndDescriptionSection(),
+             TestScoreAndDescriptionSection(testIndex: testIndex,finalScore: finalScore),
 
             //space
             const SizedBox(
@@ -68,7 +75,7 @@ class TestResultScreenBody extends StatelessWidget {
             ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => const TestAndExplainResult(),
+                itemBuilder: (context, index) =>  TestAndExplainResult(score: TestsCubit.get(context).tests[testIndex].scores[index]),
                 separatorBuilder: (context, index) => const SizedBox(
                       height: 48,
                     ),
@@ -78,7 +85,7 @@ class TestResultScreenBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: CustomButton(
-                  title: S.of(context).done,
+                  title: AppStrings.done.tr(),
                   onPressed: () {
                     Navigator.popUntil(context, (route) => route.isFirst);
                   }),

@@ -1,0 +1,151 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+
+class Routes {
+  static const String mainRoute = '/Main';
+
+
+  ///  Auth Routes
+  static const String homeViewRoute = '/HomeView';
+
+  ///  Login Routes
+  static const String loginViewRoute = '/LoginView';
+
+  ///   Forget Password Routes
+  static const String forgetPasswordChooseWayToRecoveryRote =
+      '/ForgetPasswordChooseWayToRecoveryView';
+  static const String forgetPasswordConfirmOtpViewRoute =
+      '/ForgetPasswordConfirmOtpViewRoute';
+  static const String forgetPasswordVerificationOtpViewRoute =
+      '/ForgetPasswordVerificationOtpViewRoute';
+
+  /// Confirm Using Email Routes
+  static const String confirmUsingEmailViewRoute = '/ConfirmUsingEmailView';
+
+  ///  Sign-up Routes
+  static const String registerViewRoute = '/RegisterView';
+  static const String signupVerificationOtpViewRoute =
+      '/SignupVerificationOtpView';
+  static const String registerInterestsViewRoute = '/InterestsView';
+  static const String registerFillProfileViewRoute = '/SignupFillProfileRoute';
+  static const String createPostViewRoute = '/CreatePostView';
+
+  /// todo : Room Routes
+  static const String liveViewRoute = '/LiveView';
+  static const String rankViewRoute = '/RankView';
+
+  /// Settings
+  static const String settingsRoute = '/Settings';
+  static const String manageAccRoute = '/Manage-Acc';
+  static const String privacySafetyRoute = '/Privacy-Safety';
+  static const String suggestAccRoute = '/Suggest-Acc';
+  static const String contentPrefRoute = '/Content-Pref';
+  static const String balanceRoute = '/Balance';
+  static const String balanceHistoryRoute = '/Balance-History';
+  static const String balanceRechargeRoute = '/Balance-Recharge';
+  static const String notificationsRoute = '/Notifications';
+  static const String languageRoute = '/Languages';
+  static const String wellBeingRoute = '/WellBeing';
+  static const String screenTimeRoute = '/Screen-Time';
+  static const String restrictedRoute = '/Restricted';
+  static const String accessibilityRoute = '/Accessibility';
+  static const String reportProblemRoute = '/Report-Problem';
+  static const String wikiMediaRoute = '/Wiki-Media';
+  static const String creatorCenterRoute = '/Creator-Center';
+  static const String showProfileImageRoute = '/Show-Profile-Image';
+  static const String wikiMediaSplashRoute = '/Wiki-Media-Splash';
+  static const String showOthersImageRoute = '/Show-Others-Image-View';
+  static const String uploadStoryRoute = '/Upload-Story';
+  static const String previewStoryPicRoute = '/Preview-Story-Pic';
+  static const String editStoryPicRoute = '/Edit-Story-Pic';
+  static const String previewStoryVidRoute = '/Preview-Story-Vid';
+  static const String editStoryVidRoute = '/Edit-Story-Vid';
+  static const String liveRoute = '/Live';
+  static const String liveResultRoute = '/Live-Result';
+  static const String duetRoute = '/Duet';
+  static const String analyticsScreenRoute = '/AnalyticsScreen';
+  static const String editEmailRoute = '/EditEmailScreen';
+  static const String editPhoneRoute = '/EditPhoneScreen';
+  static const String blockRoute = '/Block';
+  static const String changePasswordRoute = '/ChangePassword';
+  static const String loginActivityViewRoute = '/LoginActivity';
+  static const String balanceBuyRechargeRoute = '/BalanceBuyRecharge';
+  static const String exchangeBuyRoute = '/ExChangeScreen';
+
+  /// Me
+  static const String shareProfileScreenRoute = '/ShareProfileScreen';
+  static const String editProfileRoute = '/Edit-Profile';
+  static const String otherProfileRoute = '/Other-Profile';
+  static const String myProfileScreenRoute = '/MyProfileScreen';
+  static const String exchangeToCoinsBuyRoute = '/ExchangeToCoinsBuy';
+  static const String exchangeToDollarsBuyRoute = '/ExchangeToDollarsBuy';
+
+  /// search
+  static const String searchResultRoute = '/Search-Result';
+
+  /// feeds
+  static const String imageFeedViewRoute = '/Image-Feed-View';
+  static const String commentsViewRoute = '/Comments-View';
+  static const String galleryAlbumRoute = '/Gallery-Album';
+  static const String galleryRoute = '/Gallery';
+  static const String uploadContentRoute = '/Upload-Content';
+
+  ///Shop Routes
+  static const String shopViewRoute = '/ShopView';
+
+  ///Membership Routes
+  static const String membershipViewRoute = '/MembershipView';
+
+  ///badges Routes
+  static const String badgesViewRoute = '/BadgesView';
+}
+
+class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      default:return transitionPage(Container());
+      // case Routes.mainRoute:
+      //   final isAuthed = settings.arguments as bool? ?? false;
+      //   return transitionPage(MainView(isAuthed: isAuthed));
+      //
+      // case Routes.loginViewRoute:
+      //   return transitionPage(LoginView());
+    }
+  }
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title:
+              const Text("AppStrings.noRouteFound", style: TextStyle(fontSize: 20)),
+        ),
+        body: const SafeArea(
+          child: Center(
+            child: Text("AppStrings.noRouteFound",
+                style: TextStyle(fontSize: 35)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static transitionPage(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var tween = Tween(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).chain(CurveTween(curve: Curves.easeInOut));
+        var offsetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
+  }
+}

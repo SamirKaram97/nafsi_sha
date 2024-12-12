@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           minimumSize: const Size(double.infinity, 62),
         ),
-        child: title==null?LoadingAnimationWidget.prograssiveDots(
+        child: title==null?LoadingAnimationWidget.progressiveDots(
           color: Colors.white, size: 60,
         ):Text(
           title!,

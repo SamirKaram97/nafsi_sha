@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gp_nafsi/models/full_session_model.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 
 import '../styles/colors.dart';
 

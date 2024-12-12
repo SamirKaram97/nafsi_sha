@@ -1,11 +1,10 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../models/article_models.dart';
 import '../../../shared/network/local/shared_helper.dart';
-import '../../../shared/utils/strings.dart';
+import '../../../core/utils/app_strings.dart';
 import 'article_state.dart';
 
 class ArticlesCubit extends Cubit<ArticlesState> {
@@ -48,23 +47,19 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   List<ArticleModel?>? articles;
 
   void getArticles(context) async {
-    if (await ApiServices.internetConnectionChecker.hasConnection) {
-      emit(GetArticlesLoadingState());
       try {
-        articles =
-            (await ApiServices.getArticle()).articleModelList;
-        emit(GetArticlesSuccessState(articles: articles));
+        ///to avoid the error
+        // articles =
+        //     (
+        //         await ApiServices.getArticle()).articleModelList;
+        // emit(GetArticlesSuccessState(articles: articles));
       } catch (e) {
         print(e.toString());
         showToast(state: ToastState.WARNING,
             text: "Error while loading articles.. loading the local articles");
-        emit(GetArticlesErrorState(errorMessage: ApiServices.getErrorMessage(e, context)));
+        ///to avoid the error
+        // emit(GetArticlesErrorState(errorMessage: ApiServices.getErrorMessage(e, context)));
       }
-    }
-    else {
-      print("Network problem");
-      emit(GetArticlesErrorState(errorMessage: AppStrings.networkError.tr()));
-    }
     }
 
 
@@ -81,6 +76,7 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   {
     favouriteArticles.add(articleModel);
     await SharedHelper.saveFavouriteArticles(favouriteArticles);
+
     emit(AddArticleToFavourites());
   }
 

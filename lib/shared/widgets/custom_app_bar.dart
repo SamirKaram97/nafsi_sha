@@ -1,16 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
-import 'package:gp_nafsi/models/sound_model.dart';
-import 'package:gp_nafsi/shared/cubit/app_states.dart';
-import 'package:gp_nafsi/shared/network/local/shared_helper.dart';
-import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
-import 'package:gp_nafsi/shared/widgets/language_button.dart';
 
 import '../styles/colors.dart';
 import '../styles/images.dart';
-import 'package:dio/dio.dart';import 'dart:math' as math;
-
 import '../styles/locale.dart'; // import this
 
 

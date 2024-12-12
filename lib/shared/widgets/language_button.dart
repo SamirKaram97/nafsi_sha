@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../styles/locale.dart';
 import '../styles/styles.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 
 class LanguageButton extends StatelessWidget {
   const LanguageButton({

@@ -1,27 +1,21 @@
 
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
+import 'package:gp_nafsi/features/auth/data/models/user_data_model.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/forgot_password/forget_password_states.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_cubit.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_states.dart';
+import 'package:gp_nafsi/features/auth/presentation/screens/register/register_info_screen.dart';
+import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/layout/layout_screen.dart';
-import 'package:gp_nafsi/main.dart';
-import 'package:gp_nafsi/screens/Register_info/register_info_screen.dart';
-import 'package:gp_nafsi/screens/forget_password/cubit/forget_password_states.dart';
-import 'package:gp_nafsi/screens/login/cubit/login_cubit.dart';
-import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
+import 'package:gp_nafsi/screens/change_info/cubit/change_info_states.dart';
 import 'package:gp_nafsi/screens/preferences/cubit/preferences_states.dart';
-import 'package:gp_nafsi/screens/preferences/preferences_screen.dart';
-import 'package:gp_nafsi/screens/register/cubit/register_cubit.dart';
 import 'package:gp_nafsi/shared/cubit/app_cubit.dart';
-import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/shared/network/local/shared_helper.dart';
+import 'package:gp_nafsi/shared/styles/components.dart';
 
-import '../../layout/cubit/layout_cubit.dart';
-import '../../models/user_model.dart';
-import '../../screens/change_info/cubit/change_info_states.dart';
-import '../../screens/register/cubit/register_states.dart';
-import '../network/local/shared_helper.dart';
-import '../styles/components.dart';
 
 class StatesHandler
 {
@@ -72,7 +66,7 @@ class StatesHandler
 
 
 
-  static void _loginSuccessMethod(UserModel userModel,context)async
+  static void _loginSuccessMethod(UserDataModel userModel,context)async
   {
     SharedHelper.saveToken(userModel.token);
     AppCubit.get(context).token=userModel.token;
@@ -83,37 +77,38 @@ class StatesHandler
         navToNoBack(context, RegisterInfoScreen());
       }
     else
-    {navToNoBack(context, const LayoutScreen());}
+    {
+      navToNoBack(context, const LayoutScreen());}
   }
 
-  static void _getMeSuccessMethod(UserModel userModel,context)async
+  static void _getMeSuccessMethod(UserDataModel userModel,context)async
   {
     SharedHelper.saveToken(userModel.token);
     AppCubit.get(context).token=userModel.token;
   }
 
 
-  static void _loginFailedMethod(LoginErrorState state)
+  static void _loginFailedMethod(String message)
   {
     GoogleSignIn().signOut();
-    showToast(state: ToastState.EROOR, text: state.errorMessage);
+    showToast(state: ToastState.EROOR, text: message);
   }
 
-  static void handleLoginStates(LoginStates state,context)
-  {
-    if(state is GetFaceIdSuccess)
-      {
-        LoginCubit.get(context).userLoginFaceId(context);
-      }
-    if(state is LoginSuccessState)
-    {
-      _loginSuccessMethod(state.userModel,context);
-    }
-    else if(state is LoginErrorState)
-    {
-      _loginFailedMethod(state);
-    }
-  }
+  // static void handleLoginStates(LoginStates state,context)
+  // {
+  //   if(state is GetFaceIdSuccess)
+  //     {
+  //       LoginCubit.get(context).userLoginFaceId(context);
+  //     }
+  //   if(state is LoginSuccessState)
+  //   {
+  //     _loginSuccessMethod(state.userModel,context);
+  //   }
+  //   else if(state is LoginErrorState)
+  //   {
+  //     _loginFailedMethod(state);
+  //   }
+  // }
 
 
   static void handleResetPasswordStates(ResetPasswordStates state,context)

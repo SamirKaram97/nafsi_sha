@@ -12,7 +12,7 @@ import 'package:gp_nafsi/shared/styles/styles.dart';
 
 import '../../models/day_and_mood_item_model.dart';
 import '../styles/images.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import 'day_and_mood_item.dart';
 
 class DaysAndMoodsWidget extends StatelessWidget {

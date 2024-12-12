@@ -8,7 +8,7 @@ import 'package:gp_nafsi/screens/videos/cubit/videos_state.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:gp_nafsi/shared/widgets/videos_horizontal_list.dart';
 
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import 'load_more_button.dart';
 
 class VideosSection extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:gp_nafsi/models/user_model.dart';
+import 'package:gp_nafsi/features/auth/data/models/user_data_model.dart';
 
 abstract class PreferencesStates {}
 
@@ -13,7 +13,7 @@ class UpdatePreferencesErrorState extends PreferencesStates{
   UpdatePreferencesErrorState({required this.errorMessage});
 }
 class UpdatePreferencesSuccessState extends PreferencesStates{
-  final UserModel userModel;
+  final UserDataModel userModel;
 
   UpdatePreferencesSuccessState({required this.userModel});
 }

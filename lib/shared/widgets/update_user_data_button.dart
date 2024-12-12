@@ -6,7 +6,7 @@ import 'package:gp_nafsi/shared/styles/components.dart';
 import '../../layout/cubit/layout_cubit.dart';
 import '../styles/colors.dart';
 import '../styles/styles.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 
 class UpdateUserDataButton extends StatelessWidget {
   const UpdateUserDataButton({

@@ -10,7 +10,7 @@ import 'package:gp_nafsi/screens/videos/cubit/videos_state.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 import 'package:gp_nafsi/shared/widgets/video_card.dart';
 
-import '../../shared/utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import '../../shared/widgets/article_card.dart';
 import '../../shared/widgets/section_title.dart';
 import '../../shared/widgets/top_toggle_button.dart';
@@ -25,7 +25,8 @@ class FavoritesScreen extends StatelessWidget {
       builder: (context, state) {
         var layout = LayoutCubit.get(context);
         var favArticles = ArticlesCubit.get(context).favouriteArticles;
-        var favVideos = VideosCubit.get(context).favouriteVideos;
+        ///to avoid the error
+        // var favVideos = VideosCubit.get(context).favouriteVideos;
 
         return Column(
                 children: [
@@ -82,23 +83,25 @@ class FavoritesScreen extends StatelessWidget {
                             )
                           : BlocConsumer<VideosCubit, VideosState>(
                               builder: (context, state) {
-                                return favVideos.isEmpty?Center(
-                                  child: Text(AppStrings.noFavouriteVideos.tr(),
-                                      style: AppStyles.mSemiBold38(context).copyWith(
-                                          fontSize: getResponsiveFontSize(context, fontSize: 30)),
-                                      textAlign: TextAlign.center),
-                                ): ListView.separated(
-                                  itemBuilder: (context, index) {
-                                    return VideoCard(
-                                      videoResponse: favVideos[index],
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return const SizedBox(
-                                      height: 15,
-                                    );
-                                  },
-                                  itemCount: favVideos.length ?? 0);
+                                return SizedBox();
+                                ///to avoid the error
+                                // return favVideos.isEmpty?Center(
+                                //   child: Text(AppStrings.noFavouriteVideos.tr(),
+                                //       style: AppStyles.mSemiBold38(context).copyWith(
+                                //           fontSize: getResponsiveFontSize(context, fontSize: 30)),
+                                //       textAlign: TextAlign.center),
+                                // ): ListView.separated(
+                                //   itemBuilder: (context, index) {
+                                //     return VideoCard(
+                                //       videoResponse: favVideos[index],
+                                //     );
+                                //   },
+                                //   separatorBuilder: (context, index) {
+                                //     return const SizedBox(
+                                //       height: 15,
+                                //     );
+                                //   },
+                                //   itemCount: favVideos.length ?? 0);
                               },
                               listener:
                                   (BuildContext context, VideosState state) {},

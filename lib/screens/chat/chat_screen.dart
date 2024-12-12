@@ -9,7 +9,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../layout/cubit/layout_cubit.dart';
 import '../../shared/styles/components.dart';
-import '../../shared/utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import '../../shared/widgets/chat_input_message_section.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ChatInputMessageSection(),
               ],
               if(chatCubit.messages==null)
-                  Expanded(child: Center(child: LoadingAnimationWidget.prograssiveDots(
+                  Expanded(child: Center(child: LoadingAnimationWidget.progressiveDots(
                    color: AppColors.primaryColor, size: 80,
                  )))
             ],

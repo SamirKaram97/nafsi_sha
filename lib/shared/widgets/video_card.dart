@@ -7,7 +7,7 @@ import '../../models/video_response.dart';
 import '../styles/colors.dart';
 import '../styles/images.dart';
 import '../styles/styles.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import 'package:shimmer/shimmer.dart';
 
 class VideoCard extends StatelessWidget {

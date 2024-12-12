@@ -4,6 +4,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseServices
 {
+
+  ///TODO: fix this
   static Future<UserCredential?> signInWithGoogle() async {
 
     // Trigger the authentication flow
@@ -31,7 +33,7 @@ class FirebaseServices
     }
 
     // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);

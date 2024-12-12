@@ -83,7 +83,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindi
   Widget build(BuildContext context) {
     return BlocConsumer<VideosCubit, VideosState>(
       builder: (BuildContext context, VideosState state) {
-        bool isFavouritesContainVideo=VideosCubit.get(context).isFavouritesContainVideo(widget.videoResponse);
+        ///to avoid the error
+        // bool isFavouritesContainVideo=VideosCubit.get(context).isFavouritesContainVideo(widget.videoResponse);
         return Scaffold(
           backgroundColor: Colors.black,
           body: SafeArea(
@@ -111,11 +112,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindi
                     alignment: AlignmentDirectional.topEnd,
                     child: GestureDetector(
                       onTap: () {
-                        VideosCubit.get(context).addOrRemoveVideoFavourites(widget.videoResponse);
+                        ///to avoid the error
+                        // VideosCubit.get(context).addOrRemoveVideoFavourites(widget.videoResponse);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(14.0),
-                        child: CircleAvatar(backgroundColor: isFavouritesContainVideo?AppColors.primaryColor:const Color(0XFFFEFEFE).withOpacity(.2),child: SvgPicture.asset(Assets.imagesBookMarkIcon,color: true?AppColors.whiteColor:null,)),
+                        ///to avoid the error
+                        //child: CircleAvatar(backgroundColor: isFavouritesContainVideo?AppColors.primaryColor:const Color(0XFFFEFEFE).withOpacity(.2),child: SvgPicture.asset(Assets.imagesBookMarkIcon,color: true?AppColors.whiteColor:null,)),
                       ),
                     ),
                                     ),

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/layout/cubit/layout_states.dart';
-import 'package:gp_nafsi/models/user_model.dart';
+import 'package:gp_nafsi/features/auth/data/models/user_data_model.dart';
 import 'package:gp_nafsi/screens/change_info/cubit/change_info_states.dart';
 import 'package:gp_nafsi/shared/utils/states_handler.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/custom_app_bar.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
 import 'package:gp_nafsi/shared/widgets/title_and_text_form_filed.dart';
@@ -16,7 +16,7 @@ import 'cubit/change_info_cubit.dart';
 
 class ChangeInfoScreen extends StatelessWidget {
   const ChangeInfoScreen({super.key, required this.userModel});
-  final UserModel userModel;
+  final UserDataModel userModel;
 
 
   @override

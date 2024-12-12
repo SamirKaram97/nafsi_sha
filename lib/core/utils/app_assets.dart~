@@ -1,0 +1,230 @@
+class AppAssets {
+  ///   OnBoarding
+  static const String baseOnBoardingUrl = 'assets/onboarding/';
+  static const String bgOnBoarding = '${baseOnBoardingUrl}bg_onboarding.svg';
+  static const String onBoarding1 = '${baseOnBoardingUrl}onboarding_1.svg';
+  static const String onBoarding2 = '${baseOnBoardingUrl}onboarding_2.svg';
+  static const String onBoarding3 = '${baseOnBoardingUrl}onboarding_3.svg';
+  static const String onBoarding4 = '${baseOnBoardingUrl}onboarding_4.svg';
+
+  ///    BottomNavBarIcons
+  static const String bottomNavBarIconsUrl = 'assets/bottomnavbar_icons/';
+  static const String homeIcon = '${bottomNavBarIconsUrl}home_icon.png';
+  static const String inboxIcon = '${bottomNavBarIconsUrl}inbox_icon.png';
+  static const String searchIcon = '${bottomNavBarIconsUrl}search_icon.png';
+  static const String profileIcon = '${bottomNavBarIconsUrl}account.png';
+
+  ///  Authentication
+  static const String authUrl = 'assets/authentication/';
+  static const String loginBackgroundAuth = '${authUrl}login_bg_auth.png';
+  static const String registerBackgroundAuth = '${authUrl}register_bg_auth.png';
+  static const String emailPrefixIcon = '${authUrl}email_icon.svg';
+  static const String phonePrefixIcon = '${authUrl}phone_icon.svg';
+  static const String keyPrefixIcon = '${authUrl}password_key.svg';
+  static const String googleIcon = '${authUrl}google.svg';
+  static const String facebookIcon = '${authUrl}facebook.svg';
+  static const String appleIcon = '${authUrl}apple.svg';
+  static const String personIcon = '${authUrl}person.svg';
+  static const String emailOtp = '${authUrl}email_otp.svg';
+  static const String eyeIconRegister = '${authUrl}eye_icon_register.jpg';
+  static const String otpHand = '${authUrl}otp_hand.svg';
+  static const String otpSuccess = '${authUrl}otp_success.svg';
+  static const String otpFailed = '${authUrl}otp_failed.svg';
+  static const String emailConfirmationIcon =
+      '${authUrl}email_confirmation_icon.png';
+  static const String nameCardIcon = '${authUrl}name_card_icon.svg';
+  static const String addPhotoIcon = '${authUrl}add_photo_icon.svg';
+  static const String interestsBackground = '${authUrl}interests_bg.png';
+
+  ///    Home
+  static const String homeUrl = 'assets/home/';
+  static const String cupIcon = '${homeUrl}cup.svg';
+  static const String hotRoomsImage = '${homeUrl}hot_rooms_image.svg';
+  static const String menuIcon = '${homeUrl}menu.svg';
+  static const String usersIcon = '${homeUrl}users_icon.svg';
+  static const String discoverListStyleIcon = '${homeUrl}discover_list_style_icon.svg';
+  static const String commentIcon = '${homeUrl}comment_icon.png';
+  static const String cameraIcon = '${homeUrl}camera_icon.svg';
+  static const String gallaryIcon = '${homeUrl}gallary_icon.svg';
+  static const String everyoneIcon = '${homeUrl}everyone_icon.svg';
+  static const String dropdownIcon = '${homeUrl}dropdown_icon.svg';
+  static const String disConnected = '${homeUrl}disconnedcted.svg';
+
+  ///   Search
+  static const String searchUrl = 'assets/search/';
+  static const String searchHistoryEmpty =
+      '${searchUrl}search_history_empty.png';
+
+  ///   Settings
+  static const String settingsUrl = 'assets/settings/';
+  static const String settingsIcon = '${settingsUrl}settings_icon.png';
+  static const String leftArrowIcon = '${settingsUrl}left_arrow_icon.svg';
+  static const String accountIcon = '${settingsUrl}account_icon.svg';
+  static const String balanceIcon = '${settingsUrl}balance_icon.svg';
+  static const String blockedIcon = '${settingsUrl}blocked_icon.svg';
+  static const String dataSaverIcon = '${settingsUrl}data_saver_icon.svg';
+  static const String digitalWellbingIcon =
+      '${settingsUrl}digital_wellbing_icon.svg';
+  static const String generalIcon = '${settingsUrl}general_icon.svg';
+  static const String languageIcon = '${settingsUrl}language_icon.svg';
+  static const String loginActivityIcon =
+      '${settingsUrl}login_activity_icon.svg';
+  static const String logoutIcon = '${settingsUrl}logout_icon.svg';
+  static const String manageMyAccountIcon =
+      '${settingsUrl}manage_my_account_icon.svg';
+  static const String privacyAndSafetyIcon =
+      '${settingsUrl}privacy_and_safety_icon.svg';
+  static const String privacyIcon = '${settingsUrl}privacy_icon.svg';
+  static const String pushNotificationsIcon =
+      '${settingsUrl}push_notifications_icon.svg';
+  static const String removeSensetiveFeedsIcon =
+      '${settingsUrl}remove_sensetive_feeds_icon.svg';
+  static const String reportAProblemIcon =
+      '${settingsUrl}report_a_problem_icon.svg';
+  static const String downloadsIcon = '${settingsUrl}download_icon.svg';
+  static const String commentsSettingsIcon = '${settingsUrl}comment_icon.svg';
+  static const String mentionsIcon = '${settingsUrl}mentions_icon.svg';
+  static const String doneIcon = '${settingsUrl}done_icon.svg';
+  static const String mobileScreenTimeManagement =
+      '${settingsUrl}mobile_screen_time_management.svg';
+  static const String limitTimeScreenTimeManagement =
+      '${settingsUrl}limit_time_screen_management.svg';
+  static const String stopTimeScreenTimeManagement =
+      '${settingsUrl}stop_time_screen_management.svg';
+  static const String timeScreenTimeManagement =
+      '${settingsUrl}time_screen_time_management.svg';
+  static const String restrictedMode = '${settingsUrl}restricted_mode.svg';
+  static const String wellbeingRestrictedMode =
+      '${settingsUrl}wellbeing_restrict_mode.svg';
+  static const String reportAProblemPen = '${settingsUrl}report_a_problem.svg';
+  static const String reportAProblemVector =
+      '${settingsUrl}report_a_problem_vector.svg';
+
+  ///
+  static const String meUrl = 'assets/me/';
+  static const String bgFollowersLikes = '${meUrl}me_bg_followers_likes.svg';
+  static const String meSheilds = '${meUrl}me_sheilds.svg';
+  static const String meCopy = '${meUrl}me_copy.svg';
+  static const String meMoreVer = '${meUrl}more_ver.svg';
+  static const String svgsLiveUrl = 'assets/live/svgs/';
+  static const String imagesLiveUrl = 'assets/live/images/';
+
+  /// todo : svgs
+  static const String liveCoins = '${svgsLiveUrl}Coins.svg';
+  static const String liveFlagIcon = '${svgsLiveUrl}flag.svg';
+  static const String liveCommentIcon = '${svgsLiveUrl}comment.svg';
+  static const String liveGiftIcon = '${svgsLiveUrl}gift.svg';
+  static const String liveRocketIcon = '${svgsLiveUrl}rocket.svg';
+  static const String liveMenuIcon = '${svgsLiveUrl}menu.svg';
+  static const String liveHelloIcon = '${svgsLiveUrl}hello.svg';
+  static const String liveAdminIcon = '${svgsLiveUrl}admin.svg';
+  static const String liveCrownIcon = '${svgsLiveUrl}crown.svg';
+  static const String liveAnnounceIcon = '${svgsLiveUrl}mic_on.svg';
+  static const String liveLockedIcon = '${svgsLiveUrl}locked.svg';
+  static const String liveMicOffIcon = '${svgsLiveUrl}mic_off.svg';
+  static const String liveSendGift = '${svgsLiveUrl}send_gift.svg';
+  static const String liveGiftShape = '${svgsLiveUrl}gift_shape.svg';
+  static const String liveDocumentIcon = '${svgsLiveUrl}document.svg';
+  static const String liveMagicIcon = '${svgsLiveUrl}magic.svg';
+  static const String liveMessageIcon = '${svgsLiveUrl}message.svg';
+  static const String liveMusicIcon = '${svgsLiveUrl}music.svg';
+  static const String liveNoiceReductionIcon =
+      '${svgsLiveUrl}noice_reduction.svg';
+
+  /// todo : images
+  static const String liveShape = '${imagesLiveUrl}live_shape.png';
+  static const String liveannounceIcon = '${imagesLiveUrl}announce.png';
+  static const String liveMenuShape = '${imagesLiveUrl}menu_shape.png';
+
+  static const String baseUrl = 'assets/images/';
+  static const String appLogoSvg = '${baseUrl}logo_app.png';
+  static const String appLikeIcon = '${baseUrl}like.png';
+  static const String appDefaultPicture = '${baseUrl}default_picture.jpg';
+  static const String appOmarPicture = '${baseUrl}omar.jpeg';
+
+  /// todo : Membership
+  static const String shieldImage = "assets/membership/shield.svg";
+  static const String backArrowIcon = "assets/membership/back_arrow.svg";
+  static const String privilegeIcon = "assets/membership/privilege_icon.svg";
+  static const String privilegeBadgeIcon =
+      "assets/membership/privileg_badge_icon.svg";
+  static const String privilegeCoinsIcon =
+      "assets/membership/privileg_coins_icon.svg";
+  static const String privilegeEnhanceIcon =
+      "assets/membership/privileg_enhance_icon.svg";
+  static const String privilegeGuestsNumberIcon =
+      "assets/membership/privileg_gursts_number_icon.svg";
+  static const String privilegeHiddenIcon =
+      "assets/membership/privileg_hidden_icon.svg";
+  static const String privilegeHighRankIcon =
+      "assets/membership/privileg_hight_rand_icon.svg";
+  static const String privilegeMicFrameIcon =
+      "assets/membership/privileg_micframe_icon.svg";
+  static const String privilegeRideIcon =
+      "assets/membership/privileg_ride_icon.svg";
+  static const String privilegeThemeIcon =
+      "assets/membership/privileg_theme_icon.svg";
+  static const String privilegeUserNameStyleIcon =
+      "assets/membership/privileg_user_name_style_icon.svg";
+  static const String privilegeWelcomeMessageIcon =
+      "assets/membership/privileg_welcome_message_icon.svg";
+  static const String phoenixShield = "assets/membership/phoenix_shield.svg";
+  static const String shieldShape2 = "assets/membership/shiled_shap_2.svg";
+  static const String shieldShape3 = "assets/membership/shiled_shap_3.svg";
+  static const String sunGuardIcon = "assets/membership/sun_guard_icon.svg";
+  static const String anubisFang = "assets/membership/anubis_fang.svg";
+
+  /// todo : Membership shields
+  static const String membershipShield1 =
+      "assets/membership/membership_shiled1.svg";
+  static const String membershipShield2 =
+      "assets/membership/membership_shiled2.svg";
+  static const String membershipShield3 =
+      "assets/membership/membership_shiled3.svg";
+  static const String membershipShield4 =
+      "assets/membership/membership_shiled4.svg";
+  static const String membershipShield5 =
+      "assets/membership/membership_shiled5.svg";
+  static const String membershipShield6 =
+      "assets/membership/membership_shiled6.svg";
+  static const String membershipShield7 =
+      "assets/membership/membership_shiled7.svg";
+
+  /// todo : Membership frames
+  static const String membershipFrame1 =
+      "assets/membership/membership_frame1.svg";
+  static const String membershipFrame2 =
+      "assets/membership/membership_frame2.svg";
+  static const String membershipFrame3 =
+      "assets/membership/membership_frame3.svg";
+  static const String membershipFrame4 =
+      "assets/membership/membership_frame4.svg";
+  static const String membershipFrame5 =
+      "assets/membership/membership_frame5.svg";
+  static const String membershipFrame6 =
+      "assets/membership/membership_frame6.svg";
+  static const String membershipFrame7 =
+      "assets/membership/membership_frame7.svg";
+
+  /// todo : DailyGift
+  static const String dailySignManIcon =
+      "assets/daily_gift/daily_signin_man.svg";
+  static const String dollarIcon = "assets/daily_gift/dollar.png";
+
+  /// todo : Badges
+  static const String smallCupIcon = "assets/badges/cup.svg";
+  static const String unBlurStars = "assets/badges/unblur_stars.svg";
+  static const String blurStars = "assets/badges/blur_starts.svg";
+
+  /// todo : Store
+  static const String storeIcon = "assets/store/store_icon.svg";
+  static const String coinIcon = "assets/store/coin_icon.svg";
+  static const String saleIcons = "assets/store/sale_icon.svg";
+  static const String longWalletArrow = "assets/store/long_wallet_arrow.svg";
+  static const String checkoutBottomShape =
+      "assets/store/checkout_bottom_shape.svg";
+
+
+  static const String halloweenGhost = "assets/me/halloween_ghost.svg";
+
+}

@@ -7,8 +7,8 @@ import 'package:gp_nafsi/screens/sounds/cubit/sounds_state.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../../../models/sound_model.dart';
-import '../../../shared/network/remote/api Services.dart';
-import '../../../shared/utils/strings.dart';
+import '../../../shared/network/remote/old_api_service.dart';
+import '../../../core/utils/app_strings.dart';
 
 class SoundsCubit extends Cubit<SoundsState> {
   SoundsCubit() : super(SoundsInitialState());
@@ -198,16 +198,17 @@ class SoundsCubit extends Cubit<SoundsState> {
 
   void getSounds(List<String> keys, context) async {
     emit(GetSoundsLoadingState());
-    if (await ApiServices.internetConnectionChecker.hasConnection) {
+
       try {
-        sounds = await ApiServices.getSounds(keys);
-        emit(GetSoundsSuccessState());
+        ///to avoid the error
+        // sounds = await ApiServices.getSounds(["sleep","meditation","relaxing"]);
+        // print(sounds?.length);
+        // emit(GetSoundsSuccessState());
       } catch (e) {
-        emit(GetSoundsErrorState(
-            errorMessage: ApiServices.getErrorMessage(e, context)));
+        ///to avoid the error
+        // emit(GetSoundsErrorState(
+        //     errorMessage: ApiServices.getErrorMessage(e, context)));
       }
-    } else {
-      emit(GetSoundsErrorState(errorMessage: AppStrings.networkError.tr()));
     }
-  }
+
 }

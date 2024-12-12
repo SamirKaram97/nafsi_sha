@@ -68,7 +68,7 @@ class _LocalWebPageState extends State<LocalWebPage> {
                 action: PermissionRequestResponseAction.GRANT));
           },
           initialUrlRequest:
-              URLRequest(url: Uri.parse("https://nafsi.onrender.com/"))),
+              URLRequest(url: WebUri("https://nafsi.onrender.com/"))),
               // URLRequest(url: Uri.parse("http://10.0.2.2:5500/dd.html"))),
     );
   }
@@ -98,7 +98,6 @@ class _LocalWebPage2State extends State<LocalWebPage2> {
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://yellow-andeee-3.tiiny.site/')) {
               return NavigationDecision.prevent;

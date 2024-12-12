@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/layout/cubit/layout_states.dart';
-import 'package:gp_nafsi/screens/Register_info/register_info_screen.dart';
+import 'package:gp_nafsi/features/auth/presentation/screens/register/register_info_screen.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:pausable_timer/pausable_timer.dart';
 import 'package:url_launcher/url_launcher.dart';
 

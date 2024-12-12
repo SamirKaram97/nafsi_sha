@@ -1,0 +1,768 @@
+import 'package:get_it/get_it.dart';
+import 'package:royalesocial/features/auth/data/data_sources/fill_profile_data/fill_profile_data.dart';
+import 'package:royalesocial/features/auth/data/data_sources/forget_password_data/forget_password_data.dart';
+import 'package:royalesocial/features/auth/data/data_sources/login_data/login_data.dart';
+import 'package:royalesocial/features/auth/data/data_sources/phone_login_data/phone_login_data.dart';
+import 'package:royalesocial/features/auth/data/data_sources/sign_up_data/sign_up_data.dart';
+import 'package:royalesocial/features/auth/data/repo/auth_repo_impl.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/fill_profile_bloc/fill_profile_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/forgot_password_bloc/forgot_password_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/login_bloc/login_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/phone_login_bloc/phone_login_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/reset_password_bloc/reset_password_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/sign_up_bloc/sign_up_bloc.dart';
+import 'package:royalesocial/features/auth/presentation/controllers/sign_up_otp_bloc/sign_up_otp_bloc.dart';
+import 'package:royalesocial/features/badges/data/data_sources/remote_data_source/badges_remote_data_source.dart';
+import 'package:royalesocial/features/badges/data/rep_impl/badges_repo_impl.dart';
+import 'package:royalesocial/features/badges/domain/repo/badge_repo.dart';
+import 'package:royalesocial/features/badges/domain/use_cases/get_bages_use_case.dart'
+    as b;
+import 'package:royalesocial/features/badges/domain/use_cases/get_bages_use_case.dart';
+import 'package:royalesocial/features/badges/presentation/manger/badges_bloc.dart';
+import 'package:royalesocial/features/create_content/presentation/controllers/create_content/create_content_bloc.dart';
+import 'package:royalesocial/features/create_content/presentation/controllers/upload_content_bloc/upload_content_bloc.dart';
+import 'package:royalesocial/features/daily_gift/data/data_sources/remote_data_source/gift_remote_data_source.dart';
+import 'package:royalesocial/features/daily_gift/data/repo_impl/gift_repo_impl.dart';
+import 'package:royalesocial/features/daily_gift/domain/repos/gift_repo.dart';
+import 'package:royalesocial/features/daily_gift/domain/use_cases/claim_daily_gift.dart';
+import 'package:royalesocial/features/daily_gift/domain/use_cases/get_gifts_use_case.dart'
+    as g;
+import 'package:royalesocial/features/daily_gift/prsentation/mangers/gifts_bloc/gifts_bloc.dart';
+import 'package:royalesocial/features/daily_gift/prsentation/mangers/reward_bloc/reward_bloc.dart';
+import 'package:royalesocial/features/home/data/data_source/comment_data.dart';
+import 'package:royalesocial/features/create_content/data/create_content_data.dart';
+import 'package:royalesocial/features/home/data/data_source/local_data_source/feeds_local_data_source.dart';
+import 'package:royalesocial/features/home/data/data_source/remote_data_source/feeds_remote_data_source.dart';
+
+import 'package:royalesocial/features/home/data/data_source/remote_data_source/home_remote_data_source.dart';
+import 'package:royalesocial/features/home/data/repos/feeds_repository_impl.dart';
+import 'package:royalesocial/features/home/data/repos/home_repository/home_repository.dart';
+import 'package:royalesocial/features/home/domain/repository/base_feed_repository.dart';
+import 'package:royalesocial/features/home/domain/repository/base_home_repository.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/add_comment_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/add_reply_comment_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/dislike_comment_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/dislike_reply_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/get_comments_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/get_reply_comments_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/like_comment_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/comments_usecases/like_reply_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/create_post_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/dislike_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/get_feeds_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/get_my_recent_feeds_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/get_other_recent_feeds_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/get_saved_feeds_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/hide_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/like_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/report_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/save_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/share_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/unhide_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/feeds_usecases/unsave_feed_usecase.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/cancel_follow_request_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/cancel_friend_request_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/follow_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/get_follow_requests_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/get_friends_requests_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/get_user_followers_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/get_user_following_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/get_user_friends_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/send_friend_reques_use_case.dart';
+import 'package:royalesocial/features/home/domain/usecases/friendAndFollow/unfollow_use_case.dart';
+import 'package:royalesocial/features/home/presentation/controller/feeds/feeds_bloc.dart';
+import 'package:royalesocial/features/home/presentation/controller/home/home_bloc.dart';
+import 'package:royalesocial/features/live/data/data_source/live_remote_datasource.dart';
+import 'package:royalesocial/features/live/data/data_source/live_remote_datasource_impl.dart';
+import 'package:royalesocial/features/live/data/repo/live_repo_impl.dart';
+import 'package:royalesocial/features/live/domain/repository/live_repo.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/add_admin_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/create_live_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/get_admins_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/get_followers_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/remove_admin_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_creator_usecases/update_live_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_user_usecases.dart/follow_live_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_user_usecases.dart/get_gifts_list_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_user_usecases.dart/send_gift_usecase.dart';
+import 'package:royalesocial/features/live/domain/usecases/live_user_usecases.dart/unfollow_live_usecase.dart';
+import 'package:royalesocial/features/live/presentation/controllers/bloc/live_bloc.dart';
+import 'package:royalesocial/features/main/presentation/controller/main_bloc.dart';
+import 'package:royalesocial/features/me/data/data_for_all/exchange_to_dollars_data.dart';
+import 'package:royalesocial/features/me/data/data_for_all/profile_data.dart';
+import 'package:royalesocial/features/me/data/data_source/account_settings_data_source/account_settings_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/ads_data_source/ads_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/analytics_remote_data_source/analytics_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/audiences_data_source/audiences_romote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/balance_data_source/balance_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/general_settings_data_source/general_settings_local_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/general_settings_data_source/general_settings_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/manage_content/remote_manage_content_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/profile_data_source/profile_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/data_source/support_privacy_data_source/bloc_remote_data_source.dart';
+import 'package:royalesocial/features/me/data/repository/account_settings_repository.dart';
+import 'package:royalesocial/features/me/data/repository/ads_repository.dart';
+import 'package:royalesocial/features/me/data/repository/analytics_repository.dart';
+import 'package:royalesocial/features/me/data/repository/balance_repository.dart';
+import 'package:royalesocial/features/me/data/repository/general_settings_repository.dart';
+import 'package:royalesocial/features/me/data/repository/manage_content_repository.dart';
+import 'package:royalesocial/features/me/data/repository/profile_repository.dart';
+import 'package:royalesocial/features/me/data/repository/support_privacy_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/base_account_settings_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/base_ads_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/base_analytics_target_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/base_balance_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/base_manage_content.dart';
+import 'package:royalesocial/features/me/domain/repository/base_profile_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/general_settings_repository.dart';
+import 'package:royalesocial/features/me/domain/repository/support_privacy_repository.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/change_pass_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/delete_account_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/delete_my_language_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/get_all_accounts_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/get_email_phone_birthday_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/get_login_activity_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/get_privacy_safety_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/logout_from_all_devices_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/logout_login_activity_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/post_my_language_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/send_email_code_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/send_phone_code_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/update_email_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/account_settings_use_cases/update_phone_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/ads_details_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/change_ads_state_usecase.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/delete_ads_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/get_all_ads_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/get_audiences_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/post_promote_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/ads_use_cases/search_ads_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_account_analytics_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_categories_audiences_gender_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_live_analytics_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_top_3_content_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_top_5_countries_usecase.dart';
+import 'package:royalesocial/features/me/domain/use_cases/analytics_targat_use_cases/get_user_target_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/audiences_use_cases/get_categories_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/audiences_use_cases/get_locations_use_cases.dart';
+import 'package:royalesocial/features/me/domain/use_cases/audiences_use_cases/save_audiences_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/balance_use_cases/exchange_coins_to_diamonds_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/balance_use_cases/get_balance_history_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/balance_use_cases/recharge_coins_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/balance_use_cases/withdraw_coins_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/get_accessibility_data_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/get_digital_well_being_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/get_lanauge_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/get_notification_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/post_accessibility_data_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/post_language_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/post_restricted_mode_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/post_time_limit_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/general_settings_use_cases/update_notification_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/delete_post_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/get_content_use_cases.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/get_deleted_post_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/get_details_post_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/restore_post_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/manage_content_use_cases/review_why_content_deleted_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/add_follow_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/block_user_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/content_profile_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_my_follower_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_my_following_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_private_content_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_profile_details_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_public_image_content.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_public_video_content_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_saved_image_content.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_saved_video_content_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/get_visitor_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/remove_block_user_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/remove_follow_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/report_profile_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/share_profile_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/update_profile_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/profile_use_cases/user_profile_details_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/support_privacy_use_cases/get_users_bloc_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/support_privacy_use_cases/logout_account_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/support_privacy_use_cases/report_problem_use_case.dart';
+import 'package:royalesocial/features/me/domain/use_cases/support_privacy_use_cases/unblock_user_use_case.dart';
+import 'package:royalesocial/features/me/presentation/blocs/ads_blocs/ads_bloc/ads_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/ads_blocs/all_ads_bloc/all_ads_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/bloc_analytics/get_analytics_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/manage_content_bloc/manage_content_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/profile/profile_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/settings_bloc/account/account_setting_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/settings_bloc/general/general_setting_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/settings_bloc/support_and_privacy_bloc/support_and_privacy_bloc.dart';
+import 'package:royalesocial/features/me/presentation/blocs/target_live_analytics_bloc/target_and_live_analytics_bloc.dart';
+import 'package:royalesocial/features/membership/data/data_source/membership_remote_data_source/membership_remote_data_source.dart';
+import 'package:royalesocial/features/membership/data/repos_impl/membership_repo_impl.dart';
+import 'package:royalesocial/features/membership/domain/repos/membershp_repo.dart';
+import 'package:royalesocial/features/membership/domain/use_case/get_memberships_uses_case.dart';
+import 'package:royalesocial/features/membership/domain/use_case/purchase_membership_use_case.dart';
+import 'package:royalesocial/features/membership/prsentation/manger/Purchase_membership_bloc/purchase_membership_bloc.dart';
+import 'package:royalesocial/features/membership/prsentation/manger/membership_bloc/membership_bloc.dart';
+import 'package:royalesocial/features/search/data/data_source/search_data_source.dart';
+import 'package:royalesocial/features/search/data/repository/search_repository.dart';
+import 'package:royalesocial/features/search/domain/base_repository.dart';
+import 'package:royalesocial/features/search/domain/use_cases/clear_recent_history_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_feeds_search_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_last_watched_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_live_search_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_recent_history_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_top_searched_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/get_user_use_case.dart';
+import 'package:royalesocial/features/search/domain/use_cases/remove_item_from_recent_history_use_case.dart';
+import 'package:royalesocial/features/search/presentation/controller/search_bloc.dart';
+import 'package:royalesocial/features/store/data/data_sources/remote_data_source/store_remote_data_source.dart';
+import 'package:royalesocial/features/store/data/repos/store_repo_impl.dart';
+import 'package:royalesocial/features/store/domain/repos/Store_items_repo.dart';
+import 'package:royalesocial/features/store/domain/uses_cases/buy_store_items.dart';
+import 'package:royalesocial/features/store/domain/uses_cases/get_shop_items_use_case.dart';
+import 'package:royalesocial/features/store/presentation/mangers/store_bloc.dart';
+
+import '../../features/me/domain/use_cases/account_settings_use_cases/update_privacy_and_safety_use_case.dart';
+import '../../features/me/domain/use_cases/profile_use_cases/get_likes_content_use_case.dart';
+import '../../features/me/presentation/blocs/ads_blocs/promote_bloc/promote_bloc.dart';
+import '../../features/search/data/data_source/search_data.dart';
+
+final GetIt sl = GetIt.instance;
+
+class ServicesLocator {
+  void init() {
+    try {
+      setupAuthServices();
+      setupHomeServices();
+      setupFeedsServices();
+      setupSearchServices();
+      setupSettingsServices();
+      setupStoreServices();
+      setupMembershipServices();
+      setupBadgesServices();
+      setupGiftsServices();
+      setupCreatorCenterServices();
+      setupLiveServices();
+    } catch (e, s) {
+      print('Error during ServicesLocator initialization: $e');
+      print('Stack trace: $s');
+    }
+  }
+
+  void setupAuthServices() {
+    try {
+      /// Data Sources
+      sl.registerLazySingleton(() => SignUpData());
+      sl.registerLazySingleton(() => LoginData());
+      sl.registerLazySingleton(() => ForgetPasswordData());
+      sl.registerLazySingleton(() => PhoneLoginData());
+      sl.registerLazySingleton(() => FillProfileData());
+
+      /// Repositories
+      sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(
+            sl<SignUpData>(),
+            sl<LoginData>(),
+            sl<FillProfileData>(),
+            sl<ForgetPasswordData>(),
+            sl<PhoneLoginData>(),
+          ));
+
+      /// USE CASES
+
+      /// Blocs
+
+      sl.registerFactory(() => SignUpBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => LoginBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => FillProfileBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => PhoneLoginBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => ForgotPasswordBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => ResetPasswordBloc(sl<AuthRepo>()));
+      sl.registerFactory(() => SignUpOtpBloc(sl<AuthRepo>()));
+    } catch (e, s) {
+      print('Failed to setup Auth Services: $e');
+      print('Stack trace: $s');
+    }
+  }
+
+  void setupHomeServices() {
+    /// Bloc
+    ///
+    sl.registerFactory<MainBloc>(() => MainBloc());
+    sl.registerFactory(() => HomeBloc(
+          sl<GetUserFriendsUseCase>(),
+          sl<GetUserFollowingUseCase>(),
+          sl<FollowUseCase>(),
+          sl<UnFollowUseCase>(),
+          sl<SendFriendRequestUseCase>(),
+          sl<CancelFriendRequestUseCase>(),
+          sl<CancelFollowRequestUseCase>(),
+          sl<GetSentFriendsRequestsUseCase>(),
+          sl<GetFollowRequestsUseCase>(),
+          sl<GetUserFollowersUseCase>(),
+        ));
+
+    sl.registerLazySingleton(
+        () => GetUserFriendsUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => GetUserFollowingUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(() => FollowUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(() => UnFollowUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => SendFriendRequestUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => CancelFriendRequestUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => CancelFollowRequestUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => GetSentFriendsRequestsUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => GetFollowRequestsUseCase(sl<BaseHomeRepository>()));
+    sl.registerLazySingleton(
+        () => GetUserFollowersUseCase(sl<BaseHomeRepository>()));
+
+    /// Repository
+    sl.registerLazySingleton<BaseHomeRepository>(
+        () => HomeRepository(sl<BaseHomeRemoteDataSource>()));
+
+    /// DATA SOURCE
+    sl.registerLazySingleton<BaseHomeRemoteDataSource>(
+        () => HomeRemoteDataSource());
+    sl.registerLazySingleton(() => CommentData());
+  }
+
+  void setupStoreServices() {
+    // Data Sources
+    sl.registerLazySingleton<StoreRemoteDataSource>(
+        () => StoreRemoteDataSourceImpl());
+
+    // Repositories
+    sl.registerLazySingleton<StoreRepo>(
+        () => StoreRepoImpl(shopRemoteDataSource: sl<StoreRemoteDataSource>()));
+
+    // Use Cases
+    sl.registerLazySingleton(
+        () => GetStoreItemsUseCase(shopRepo: sl<StoreRepo>()));
+    sl.registerLazySingleton(
+        () => BuyShopItemsUseCase(shopRepo: sl<StoreRepo>()));
+
+    // Blocs
+    sl.registerFactory(() => StoreBloc(sl<GetStoreItemsUseCase>(),sl<BuyShopItemsUseCase>()));
+
+  }
+
+  void setupSearchServices() {
+    // Data Sources
+    sl.registerLazySingleton<BaseSearchRemoteDataSource>(
+      () => SearchRemoteDataSource(SearchData()),
+    );
+
+    sl.registerLazySingleton(() => SearchData());
+
+    // Repositories
+    sl.registerLazySingleton<BaseSearchRepository>(() => SearchRepository(
+          sl<BaseSearchRemoteDataSource>(),
+          sl<SearchData>(),
+        ));
+
+    // Use Cases
+    sl.registerLazySingleton(
+        () => GetUserSearchedUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => GetFeedsSearchUseCase(sl<BaseSearchRepository>()));
+    // sl.registerLazySingleton(() => GetVideoSearchUseCase(sl()));
+    sl.registerLazySingleton(
+        () => GetSearchHistoryUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => GetTopSearchedUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => GetLastWatchedUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => GetRoomSearchUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => RemoveItemFromRecentHistoryUseCase(sl<BaseSearchRepository>()));
+    sl.registerLazySingleton(
+        () => ClearRecentHistoryUseCase(sl<BaseSearchRepository>()));
+
+    // Blocs
+    sl.registerFactory(() => SearchBloc(
+          sl<ClearRecentHistoryUseCase>(),
+          sl<GetUserSearchedUseCase>(),
+          sl<GetSearchHistoryUseCase>(),
+          sl<GetTopSearchedUseCase>(),
+          sl<GetLastWatchedUseCase>(),
+          sl<GetRoomSearchUseCase>(),
+          sl<RemoveItemFromRecentHistoryUseCase>(),
+        ));
+  }
+
+  void setupSettingsServices() {
+    /// Data Sources
+    sl.registerLazySingleton<BaseBlockAndLogoutRemoteDataSource>(
+        () => BlocAndLogoutRemoteDataSource());
+    sl.registerLazySingleton<ProfileRemoteDataSource>(
+        () => ProfileRemoteDataSourceImpl());
+    sl.registerLazySingleton<BaseGeneralSettingsRemoteDataSource>(
+        () => GeneralSettingsRemoteDataSource());
+
+    sl.registerLazySingleton<BaseGeneralSettingsLocalDataSource>(
+        () => GeneralSettingsLocalDateSource());
+    sl.registerLazySingleton<BalanceRemoteDataSource>(
+        () => BalanceRemoteDataSourceImpl());
+
+    sl.registerLazySingleton<BaseAccountSettingsRemoteDataSource>(
+        () => AccountSettingsRemoteDataSource());
+    sl.registerLazySingleton<ExchangeToDollarData>(
+        () => ExchangeToDollarData());
+    sl.registerLazySingleton(() => ProfileData());
+
+    /// Repositories
+
+    sl.registerLazySingleton<BaseSupportAndPrivacyRepository>(
+        () => BlocAndLogoutRepository(sl()));
+    sl.registerLazySingleton<BaseProfileRepository>(
+        () => ProfileRepository(sl()));
+    sl.registerLazySingleton<BaseGeneralSettingsRepository>(
+        () => GeneralSettingsRepository(sl(), sl()));
+    sl.registerLazySingleton<BaseBalanceRepository>(
+        () => BalanceRepository(sl()));
+
+    sl.registerLazySingleton<BaseAccountSettingsRepository>(
+        () => AccountSettingsRepository(sl()));
+
+    /// Use Cases
+    sl.registerLazySingleton(() => SendEmailCodeUseCase(sl()));
+    sl.registerLazySingleton(() => UpdateEmailUseCase(sl()));
+    sl.registerLazySingleton(() => GetEmailAndPhoneAndBirthdayUseCase(sl()));
+    sl.registerLazySingleton(() => DeleteAccountUseCase(sl()));
+    sl.registerLazySingleton(() => SendPhoneCodeUseCase(sl()));
+    sl.registerLazySingleton(() => UpdatePhoneUseCase(sl()));
+    sl.registerLazySingleton(() => GetPrivacyAndSafetyUseCase(sl()));
+    sl.registerLazySingleton(() => GetUserBlocUseCase(sl()));
+    sl.registerLazySingleton(() => UnBlockUserUseCase(sl()));
+    sl.registerLazySingleton(() => LogoutAccountUseCase(sl()));
+    sl.registerLazySingleton(() => ReportProblemUseCase(sl()));
+    sl.registerLazySingleton(() => PostLanguageUseCase(sl()));
+    sl.registerLazySingleton(() => PostMyLanguageUseCase(sl()));
+    sl.registerLazySingleton(() => DeleteMyLanguageUseCase(sl()));
+    sl.registerLazySingleton(() => GetLoginActivityUseCase(sl()));
+    sl.registerLazySingleton(() => LogoutLoginActivityUseCase(sl()));
+    sl.registerLazySingleton(() => GetProfileDetailsUseCase(sl()));
+    sl.registerLazySingleton(() => GetPublicVideoContentUseCase(sl()));
+    sl.registerLazySingleton(() => GetPrivateContentUseCase(sl()));
+    sl.registerLazySingleton(() => GetSavedVideoContentUseCase(sl()));
+    sl.registerLazySingleton(() => GetLikesContentUseCase(sl()));
+    sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
+    sl.registerLazySingleton(() => GetMyFollowerUseCase(sl()));
+    sl.registerLazySingleton(() => GetMyFollowingUseCase(sl()));
+    sl.registerLazySingleton(() => GetLanguageUseCase(sl()));
+    sl.registerLazySingleton(() => GetNotificationUseCase(sl()));
+    sl.registerLazySingleton(() => UpdateNotificationUseCase(sl()));
+    sl.registerLazySingleton(() => PostTimeLimitUseCase(sl()));
+    sl.registerLazySingleton(() => PostRestrictedModeUseCase(sl()));
+    sl.registerLazySingleton(() => GetDigitalWellBeingUseCase(sl()));
+    sl.registerLazySingleton(() => GetAccessibilityDataUseCase(sl()));
+    sl.registerLazySingleton(() => PostAccessibilityDataUseCase(sl()));
+    sl.registerLazySingleton(() => GetBalanceHistoryUseCase(sl()));
+    sl.registerLazySingleton(() => UpdatePrivacyAndSafetyUseCase(sl()));
+    sl.registerLazySingleton(() => ChangePasswordUseCase(sl()));
+    sl.registerLazySingleton(() => LogoutFromAllDevicesUseCase(sl()));
+    sl.registerLazySingleton(() => GetAllAccountsUseCase(sl()));
+    sl.registerLazySingleton(() => RemoveFollowUseCase(sl()));
+    sl.registerLazySingleton(() => AddFollowUseCase(sl()));
+    sl.registerLazySingleton(() => GetVisitorUseCase(sl()));
+    sl.registerLazySingleton(() => GetPublicImageContentUseCase(sl()));
+    sl.registerLazySingleton(() => GetSavedImageContentUseCase(sl()));
+    sl.registerLazySingleton(() => UserProfileDetailsUseCase(sl()));
+    sl.registerLazySingleton(() => UserProfileContentUseCase(sl()));
+    sl.registerLazySingleton(() => ShareProfileUseCase(sl()));
+    sl.registerLazySingleton(() => ReportProfileUseCase(sl()));
+    sl.registerLazySingleton(() => BlockUserUseCase(sl()));
+    sl.registerLazySingleton(() => RemoveBlockUserUseCase(sl()));
+    sl.registerLazySingleton(() => ExchangeCoinsToDiamondsUseCase(sl()));
+    sl.registerLazySingleton(() => RechargeCoinsUseCase(sl()));
+    sl.registerLazySingleton(() => WithdrawCoinsUseCase(sl()));
+
+    /// Blocs
+    sl.registerFactory(() => SupportAndPrivacyBloc(sl(), sl(), sl(), sl()));
+    sl.registerFactory(() => ProfileBloc(
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl()));
+    sl.registerFactory(() => GeneralSettingBloc(
+        sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+    sl.registerFactory(() => AccountSettingBloc(
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+    ));
+  }
+
+  void setupMembershipServices() {
+    // Data Sources
+    sl.registerLazySingleton<MembershipRemoteDataSource>(
+        () => MembershipRemoteDataSourceImpl());
+
+    // Repositories
+    sl.registerLazySingleton<MembershipRepo>(() => MembershipRepoImpl(
+        membershipRemoteDataSource: sl<MembershipRemoteDataSource>()));
+
+    // Use Cases
+    sl.registerLazySingleton(
+        () => GetMembershipsUsesCase(membershipRepo: sl<MembershipRepo>()));
+    sl.registerLazySingleton(
+        () => PurchaseMembershipUseCase(membershipRepo: sl<MembershipRepo>()));
+
+    // Blocs
+    sl.registerFactory(() => MembershipBloc(sl<GetMembershipsUsesCase>()));
+    sl.registerFactory(
+        () => PurchaseMembershipBloc(sl<PurchaseMembershipUseCase>()));
+  }
+
+  void setupBadgesServices() {
+    // Data Sources
+    sl.registerLazySingleton<BadgesRemoteDataSource>(
+        () => BadgesRemoteDataSourceImpl());
+
+    // Repositories
+    sl.registerLazySingleton<BadgesRepo>(() =>
+        BadgesRepoImpl(badgesRemoteDataSource: sl<BadgesRemoteDataSource>()));
+
+    // Use Cases
+    sl.registerLazySingleton(
+        () => b.GetBadgesUseCase(badgeRepo: sl<BadgesRepo>()));
+
+    // Blocs
+    sl.registerFactory(() => BadgesBloc(sl<GetBadgesUseCase>()));
+  }
+
+  void setupGiftsServices() {
+    // Data Sources
+    sl.registerLazySingleton<GiftRemoteDataSource>(
+        () => GiftRemoteDataSourceImpl());
+
+    // Repositories
+    sl.registerLazySingleton<GiftRepo>(
+        () => GiftRepoImpl(giftRemoteDataSource: sl<GiftRemoteDataSource>()));
+
+    // Use Cases
+    sl.registerLazySingleton(() => g.GetGiftsUseCase(giftRepo: sl<GiftRepo>()));
+
+    sl.registerLazySingleton(
+        () => ClaimDailyGiftUseCase(giftRepo: sl<GiftRepo>()));
+
+    // Blocs
+    sl.registerFactory(() => GiftsBloc(sl<g.GetGiftsUseCase>()));
+    sl.registerFactory(() => RewardBloc(sl<ClaimDailyGiftUseCase>()));
+  }
+
+  void setupCreatorCenterServices() {
+    /// Data Sources
+    sl.registerLazySingleton<BaseAnalyticsRemoteDataSource>(
+        () => AnalyticsRemoteDateSource());
+    sl.registerLazySingleton<BaseManageContentRemoteDataSource>(
+        () => ManageContentRemoteDateSource());
+    sl.registerLazySingleton<BaseAdsRemoteDataSource>(
+        () => AdsRemoteDataSource());
+    sl.registerLazySingleton<BaseAudiencesRemoteDataSource>(
+        () => AudiencesRemoteDataSource());
+
+    /// Repositories
+    sl.registerLazySingleton<BaseAnalyticsAndTargetRepository>(
+        () => AnalyticsRepository(sl()));
+    sl.registerLazySingleton<BaseManageContentRepository>(
+        () => ManageContentRepository(sl()));
+
+    /// removed
+    //
+    // sl.registerLazySingleton<BaseAudienceRepository>(
+    //         () => AudiencesRepository(sl()));
+    sl.registerLazySingleton<BaseAdsRepository>(() => AdsRepository(sl()));
+
+    /// Use Cases
+    sl.registerLazySingleton(() => GetDetailsPostUseCase(sl()));
+    sl.registerLazySingleton(() => GetDeletedPostUseCase(sl()));
+    sl.registerLazySingleton(() => DeletePostUseCase(sl()));
+    sl.registerLazySingleton(() => RestorePostUseCase(sl()));
+    sl.registerLazySingleton(() => GetPostManageContentUseCase(sl()));
+    sl.registerLazySingleton(() => PostPromoteUseCase(sl()));
+    sl.registerLazySingleton(() => GetAudiencesUseCase(sl()));
+    sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
+    sl.registerLazySingleton(() => GetAllAdsUseCase(sl()));
+    sl.registerLazySingleton(() => AdsDetailsUseCase(sl()));
+    sl.registerLazySingleton(() => SaveAudiencesUseCase(sl()));
+    sl.registerLazySingleton(() => GetAccountDetailsAnalyticsUseCase(sl()));
+    sl.registerLazySingleton(() => GetTop3ContentUseCase(sl()));
+    sl.registerLazySingleton(() => GetTop5CountriesUsecase(sl()));
+    sl.registerLazySingleton(() => GetCategoriesAudiencesGenderUseCase(sl()));
+    sl.registerLazySingleton(() => GetUserTargetUseCase(sl()));
+    sl.registerLazySingleton(() => GetLiveAnalyticsUseCae(sl()));
+    sl.registerLazySingleton(() => GetLocationsUseCase(sl()));
+    sl.registerLazySingleton(() => DeleteAdsUseCase(sl()));
+    sl.registerLazySingleton(() => SearchAdsUseCase(sl()));
+    sl.registerLazySingleton(() => ReviewWhyContentDeletedUseCase(sl()));
+    sl.registerLazySingleton(() => ChangeAdsStateUsecase(sl()));
+
+    /// Blocs
+    sl.registerFactory(() => GetAnalyticsBloc(sl(), sl(), sl(), sl(), sl()));
+    sl.registerFactory(
+        () => ManageContentBloc(sl(), sl(), sl(), sl(), sl(), sl()));
+    sl.registerFactory(() => AllAdsBloc(sl(), sl(), sl(), sl(), sl()));
+    sl.registerFactory(() => AdsBloc(
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+        ));
+    sl.registerFactory(() => PromoteBloc(sl(), sl()));
+    sl.registerFactory(() => TargetAndLiveAnalyticsBloc(sl()));
+  }
+
+  //live
+
+  void setupLiveServices() {
+    // Data Sources
+    sl.registerLazySingleton<LiveRemoteDataSource>(
+      () => LiveRemoteDataSourceImpl(),
+    );
+    //Registering repo
+    sl.registerLazySingleton<LiveRepo>(() => LiveRepoImpl(
+          sl<LiveRemoteDataSource>(),
+        ));
+
+    // Registering Blocs
+    sl.registerFactory(() => LiveBloc(
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+        ));
+
+    // Registering Use Cases as Lazy Singletons
+    sl.registerLazySingleton(() => AddAdminUseCase(sl()));
+    sl.registerLazySingleton(() => GetAdminsUseCase(sl()));
+    sl.registerLazySingleton(() => RemoveAdminUseCase(sl()));
+    sl.registerLazySingleton(() => CreateLiveUseCase(sl()));
+    sl.registerLazySingleton(() => UpdateLiveUseCase(sl()));
+    sl.registerLazySingleton(() => GetFollowersUseCase(sl()));
+    sl.registerLazySingleton(() => FollowLiveUseCase(sl()));
+    sl.registerLazySingleton(() => UnfollowLiveUseCase(sl()));
+    sl.registerLazySingleton(() => GetGiftsUseCase(sl()));
+    sl.registerLazySingleton(() => SendGiftUseCase(sl()));
+  }
+
+  void setupFeedsServices() {
+    //bloc
+    sl.registerFactory(() => FeedsBloc(
+        sl<GetCommentsFeedsUseCase>(),
+        sl<GetReplyCommentsFeedsUseCase>(),
+        sl<GetFeedsUseCase>(),
+        sl<LikeFeedUseCase>(),
+        sl<DisLikeFeedUseCase>(),
+        sl<AddCommentFeedUseCase>(),
+        sl<AddReplyCommentFeedUseCase>(),
+        sl<UnSaveFeedUseCase>(),
+        sl<LikeCommentUseCase>(),
+        sl<DisLikeCommentUseCase>(),
+        sl<SaveFeedUseCase>(),
+        sl<GetSavedFeedsUseCase>(),
+        sl<HideFeedUseCase>(),
+        sl<UnHideFeedUseCase>(),
+        sl<ReportFeedUseCase>(),
+        sl<CreatePostUseCase>(),
+        sl<GetFeedsSearchUseCase>(),
+        sl<GetMyRecentFeedsUseCase>(),
+        sl<GetOtherRecentFeedsUseCase>(),
+        sl<LikeReplyUseCase>(),
+        sl<DisLikeReplyUseCase>(),
+        sl<ShareFeedUseCase>()));
+    sl.registerFactory(() => UploadContentBloc());
+    sl.registerFactory(() =>
+        CreateContentBloc(sl<CreatePostUseCase>(), sl<ShareFeedUseCase>()));
+
+    //use cases
+    sl.registerLazySingleton(() => GetFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => GetMyRecentFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => GetOtherRecentFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => GetSavedFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => AddCommentFeedUseCase(
+          sl<BaseFeedRepository>(),
+        ));
+    sl.registerLazySingleton(
+        () => AddReplyCommentFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => DisLikeFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => LikeFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => GetCommentsFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => GetReplyCommentsFeedsUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => HideFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => UnHideFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => ReportFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => SaveFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => UnSaveFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => ShareFeedUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => CreatePostUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => LikeCommentUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => DisLikeCommentUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(() => LikeReplyUseCase(sl<BaseFeedRepository>()));
+    sl.registerLazySingleton(
+        () => DisLikeReplyUseCase(sl<BaseFeedRepository>()));
+
+    ///Repository
+    sl.registerLazySingleton<BaseFeedRepository>(() => FeedsRepositoryImpl(
+        sl<FeedsRemoteDataSource>(), sl<FeedsLocalDataSource>()));
+
+    /// DATA SOURCE
+    sl.registerLazySingleton<FeedsRemoteDataSource>(
+        () => FeedsRemoteDataSourceImpl());
+    sl.registerLazySingleton<FeedsLocalDataSource>(
+        () => FeedsLocalDataSourceImpl());
+
+    sl.registerLazySingleton<CreateContentData>(() => CreateContentData());
+  }
+}

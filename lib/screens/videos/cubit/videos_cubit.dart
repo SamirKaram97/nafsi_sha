@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/models/video_model.dart';
 import 'package:gp_nafsi/shared/network/local/shared_helper.dart';
 
-import 'package:gp_nafsi/shared/network/remote/api%20Services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../models/video_response.dart';
-import '../../../shared/utils/strings.dart';
+import '../../../core/utils/app_strings.dart';
 import 'videos_state.dart';
 
 class VideosCubit extends Cubit<VideosState> {
@@ -31,11 +30,13 @@ class VideosCubit extends Cubit<VideosState> {
 
   void getVideos(context)async {
     emit(GetVideosLoadingState());
-    if (await ApiServices.internetConnectionChecker.hasConnection) {
     try{
       //todo
       //factore methods with states
-       videos= await ApiServices.getVideos(context);
+
+      ///to avoid the error
+      ///
+      //  videos= await ApiServices.getVideos(context);
       //  videos=[];
       print(" videos length ${videos!.length}");
       if(videos!.length>0)
@@ -52,14 +53,10 @@ class VideosCubit extends Cubit<VideosState> {
     }
     catch(e)
     {
-      emit(GetVideosErrorState(errorMessage: ApiServices.getErrorMessage(e, context)));
+      ///to avoid the error
+      // emit(GetVideosErrorState(errorMessage: ApiServices.getErrorMessage(e, context)));
       print(e.toString());
     }
-  }
-    else
-      {
-        emit(GetVideosErrorState(errorMessage: AppStrings.networkError.tr()));
-      }
   }
 
 

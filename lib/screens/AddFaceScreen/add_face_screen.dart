@@ -7,7 +7,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/layout/cubit/layout_states.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 
 class FaceProfileAuth extends StatefulWidget {
   const FaceProfileAuth({super.key});
@@ -96,7 +96,7 @@ class _FaceProfileAuthState extends State<FaceProfileAuth> {
                     action: PermissionRequestResponseAction.GRANT));
               },
               initialUrlRequest:
-              URLRequest(url: Uri.parse("https://nafsi.onrender.com/"))),
+              URLRequest(url:WebUri("https://nafsi.onrender.com/"))),
           // URLRequest(url: Uri.parse("http://10.0.2.2:5500/dd.html"))),
         );
       },

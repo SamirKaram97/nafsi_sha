@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gp_nafsi/screens/register/cubit/register_cubit.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_cubit.dart';
 import 'package:gp_nafsi/shared/widgets/preference_selection_item.dart';
 
 import '../../screens/preferences/cubit/preferences_cubit.dart';

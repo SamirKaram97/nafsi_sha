@@ -1,8 +1,8 @@
 
 import 'package:easy_localization/easy_localization.dart' as loc;
 import 'package:flutter/material.dart';
-import 'package:gp_nafsi/screens/register/cubit/register_cubit.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_cubit.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:validators/validators.dart' as validators;
 import 'package:intl/intl.dart' as intl;
 import '../styles/colors.dart';

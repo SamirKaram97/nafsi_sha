@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/layout/cubit/layout_states.dart';
-import 'package:gp_nafsi/screens/login/cubit/login_states.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
 import 'package:gp_nafsi/shared/widgets/load_more_button.dart';
 import 'package:gp_nafsi/shared/widgets/update_user_data_button.dart';
@@ -76,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 Text(
-                  "${layoutcubit.userModel?.fName ?? ""} ${layoutcubit.userModel?.lName ?? ""}",
+                  "${layoutcubit.userModel?.firstName ?? ""} ${layoutcubit.userModel?.lastName ?? ""}",
                   style: AppStyles.mSemiBold22(context),
                 ),
                 const SizedBox(

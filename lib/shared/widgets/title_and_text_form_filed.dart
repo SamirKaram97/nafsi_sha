@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/styles.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import 'custom_text_form_filed.dart';
 
 

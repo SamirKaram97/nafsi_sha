@@ -4,7 +4,7 @@ import 'package:gp_nafsi/screens/test_result/test_result_screen.dart';
 import 'package:gp_nafsi/screens/tests/cubit/tests_cubit.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/custom_app_bar.dart';
 import 'package:gp_nafsi/shared/widgets/custom_button.dart';
 import 'package:gp_nafsi/shared/widgets/shadow_box.dart';

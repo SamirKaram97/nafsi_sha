@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gp_nafsi/models/article_models.dart';
 import 'package:gp_nafsi/screens/article_content/article_content_screen.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/shadow_box.dart';
 import 'package:shimmer/shimmer.dart';
 

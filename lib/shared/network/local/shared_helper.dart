@@ -1,6 +1,6 @@
 import 'package:gp_nafsi/models/article_models.dart';
 import 'package:gp_nafsi/models/video_response.dart';
-import 'package:gp_nafsi/shared/utils/constants.dart';
+import 'package:gp_nafsi/core/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedHelper

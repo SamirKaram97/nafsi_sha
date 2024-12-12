@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gp_nafsi/screens/register/cubit/register_cubit.dart';
-import 'package:gp_nafsi/screens/register/cubit/register_states.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_cubit.dart';
+import 'package:gp_nafsi/features/auth/presentation/controllers/register/register_states.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
 

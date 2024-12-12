@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_cubit.dart';
 import 'package:gp_nafsi/screens/sounds/cubit/sounds_state.dart';
 import 'package:gp_nafsi/shared/styles/colors.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../shared/styles/styles.dart';

@@ -4,8 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
+import 'package:gp_nafsi/features/auth/data/models/user_data_model.dart';
 import 'package:gp_nafsi/models/session_model.dart';
-import 'package:gp_nafsi/models/user_model.dart';
 import 'package:gp_nafsi/screens/articles/articles_screen.dart';
 import 'package:gp_nafsi/screens/articles/cubit/article_cubit.dart';
 import 'package:gp_nafsi/screens/chat/chat_screen.dart';
@@ -18,16 +19,15 @@ import 'package:gp_nafsi/screens/tests/tests_screen.dart';
 import 'package:gp_nafsi/screens/videos/cubit/videos_cubit.dart';
 import 'package:gp_nafsi/screens/videos/videos_screen.dart';
 import 'package:gp_nafsi/shared/styles/components.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pausable_timer/pausable_timer.dart';
 
+import '../../features/auth/presentation/screens/login/login_screen.dart';
 import '../../models/custom_nav_bar_item_model.dart';
 import '../../models/full_session_model.dart';
-import '../../screens/login/login_screen.dart';
 import '../../shared/cubit/app_cubit.dart';
 import '../../shared/network/local/shared_helper.dart';
-import '../../shared/network/remote/api Services.dart';
+import '../../shared/network/remote/old_api_service.dart';
 import '../../shared/styles/images.dart';
 import 'layout_states.dart';
 
@@ -51,9 +51,9 @@ class LayoutCubit extends Cubit<LayoutState> {
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final InternetConnectionChecker _internetConnectionChecker =
-  InternetConnectionChecker();
+  InternetConnectionChecker.instance;
 
-  UserModel? userModel;
+  UserDataModel? userModel;
   int currentIndex = 0;
   List<BottomNavBarItemModel> items(context) => [
         BottomNavBarItemModel(
@@ -124,10 +124,14 @@ class LayoutCubit extends Cubit<LayoutState> {
     AppCubit.get(context).token=null;
     ArticlesCubit.get(context).favouriteArticles=[];
 
-    createSession(context).then((value) {
+    try{createSession(context);
+    emit(LogoutState());
+    isLogout=false;}
+        catch (error)
+    {
       emit(LogoutState());
       isLogout=false;
-    });
+    }
 
   }
 
@@ -150,7 +154,9 @@ class LayoutCubit extends Cubit<LayoutState> {
     if (await _internetConnectionChecker.hasConnection) {
       try {
         // RegisterRequestModel requestModel=RegisterRequestModel(firstname: "Mohamed",age: "40",lastname: "gmomma",email: emailController.text,gender:"male",password: passwordController.text);
-        userModel = await ApiServices.getMe(context);
+
+        ///to avoid the error
+        //userModel = await ApiServices.getMe(context);
           emit(GetUserDataSuccessState());
         print(userModel?.age);
       }
@@ -172,7 +178,8 @@ class LayoutCubit extends Cubit<LayoutState> {
     emit(GetUserSessionsLoadingState());
     if (await _internetConnectionChecker.hasConnection) {
       try {
-        userSessions= await ApiServices.getSessions(context);
+        ///to avoid the error
+        //userSessions= await ApiServices.getSessions(context);
         emit(GetUserSessionsSuccessState());
       }
       catch (error) {
@@ -203,14 +210,16 @@ class LayoutCubit extends Cubit<LayoutState> {
     if (await _internetConnectionChecker.hasConnection) {
       try {
         print(userSession?.toJson());
-        sessionId=await ApiServices.createSession(userSession!,context);
+        ///to avoid the error
+       // sessionId=await ApiServices.createSession(userSession!,context);
         
         print("create");
         emit(CreateSessionSuccessState());
       }
       catch (error) {
         print(error.toString());
-        log(ApiServices.getErrorMessage(error, context));
+        ///to avoid the error
+        //log(ApiServices.getErrorMessage(error, context));
         emit(CreateSessionErrorState(sessionModel: userSession!));
       }
     } else {
@@ -223,7 +232,8 @@ class LayoutCubit extends Cubit<LayoutState> {
     emit(UpdateSessionLoadingState());
     if (await _internetConnectionChecker.hasConnection) {
       try {
-        await ApiServices.updateSession(userSession!,sessionId!,context);
+        ///to avoid the error
+        //await ApiServices.updateSession(userSession!,sessionId!,context);
         print("update");
         emit(UpdateSessionSuccessState());
       }
@@ -241,17 +251,18 @@ class LayoutCubit extends Cubit<LayoutState> {
     emit(ChangePasswordLoadingStata());
     if (await _internetConnectionChecker.hasConnection) {
       try {
-        await ApiServices.updateUserPassword(oldPassword,newPassword,context);
+        ///to avoid the error
+        //await ApiServices.updateUserPassword(oldPassword,newPassword,context);
         showToast(state: ToastState.SUCCESS, text: AppStrings.passwordChangedSuccessfully.tr());
         emit(ChangePasswordSuccessStata());
       }
       catch (error) {
         print(error.toString());
-        log(ApiServices.getErrorMessage(error, context));
-        showToast(state: ToastState.EROOR, text:ApiServices.getErrorMessage(error, context));
-        emit(ChangePasswordErrorStata(
-          errorMessage: ApiServices.getErrorMessage(error, context)
-        ));
+        ///to avoid the error
+        // showToast(state: ToastState.EROOR, text:ApiServices.getErrorMessage(error, context));
+        // emit(ChangePasswordErrorStata(
+        //   errorMessage: ApiServices.getErrorMessage(error, context)
+        // ));
 
       }
     } else {
@@ -269,14 +280,14 @@ class LayoutCubit extends Cubit<LayoutState> {
     emit(UpdateUserFaceIdLoadingState());
     if (await _internetConnectionChecker.hasConnection) {
       try {
-        UserModel uModel = await ApiServices.updateMeWithFaceId(faceId,context);
-        userModel=uModel;
+        ///to avoid the error
+        // UserDataModel uModel = await ApiServices.updateMeWithFaceId(faceId,context);
+        // userModel=uModel;
         emit(UpdateUserFaceIdSuccessState());
       }
       catch (error) {
-        log(error.toString());
-        log(ApiServices.getErrorMessage(error, context));
-        emit(UpdateUserFaceIdErrorState(errorMessage: ApiServices.getErrorMessage(error, context)));
+        ///to avoid the error
+        // emit(UpdateUserFaceIdErrorState(errorMessage: ApiServices.getErrorMessage(error, context)));
       }
     } else {
       emit(UpdateUserFaceIdErrorState(errorMessage: AppStrings.networkError.tr()));

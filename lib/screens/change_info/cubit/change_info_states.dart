@@ -1,4 +1,4 @@
-import 'package:gp_nafsi/models/user_model.dart';
+import 'package:gp_nafsi/features/auth/data/models/user_data_model.dart';
 
 abstract class ChangeInfoState{}
 
@@ -8,7 +8,7 @@ class ChangePasswordVisibilityState extends ChangeInfoState{}
 
 class ChangeUserInfoLoadingState extends ChangeInfoState{}
 class ChangeUserInfoSuccessState extends ChangeInfoState{
-  final UserModel userModel;
+  final UserDataModel userModel;
 
   ChangeUserInfoSuccessState({required this.userModel});
 }

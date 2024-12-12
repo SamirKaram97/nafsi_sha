@@ -10,7 +10,7 @@ import 'package:gp_nafsi/shared/widgets/custom_button.dart';
 
 import '../../shared/styles/colors.dart';
 import '../../shared/styles/styles.dart';
-import '../../shared/utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import '../../shared/widgets/preference_selection_section.dart';
 
 class PreferencesScreen extends StatelessWidget {

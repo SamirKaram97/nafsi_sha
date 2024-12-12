@@ -6,7 +6,7 @@ import 'package:gp_nafsi/layout/cubit/layout_cubit.dart';
 import 'package:gp_nafsi/screens/tests/cubit/tests_cubit.dart';
 import 'package:gp_nafsi/screens/tests/cubit/tests_state.dart';
 import 'package:gp_nafsi/shared/styles/styles.dart';
-import 'package:gp_nafsi/shared/utils/strings.dart';
+import 'package:gp_nafsi/core/utils/app_strings.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:gp_nafsi/shared/widgets/test_card.dart';
 

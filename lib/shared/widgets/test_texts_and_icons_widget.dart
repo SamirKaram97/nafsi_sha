@@ -6,7 +6,7 @@ import '../../models/test_model.dart';
 import '../styles/colors.dart';
 import '../styles/images.dart';
 import '../styles/styles.dart';
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 
 
 class TestTextsAndIconsWidget extends StatelessWidget {

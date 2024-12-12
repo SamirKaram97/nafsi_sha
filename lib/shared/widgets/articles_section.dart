@@ -8,7 +8,7 @@ import 'package:gp_nafsi/shared/widgets/load_more_button.dart';
 import 'package:gp_nafsi/shared/widgets/section_title.dart';
 import 'package:gp_nafsi/shared/widgets/shimmer_article_card.dart';
 
-import '../utils/strings.dart';
+import '../../core/utils/app_strings.dart';
 import 'article_card.dart';
 
 class ArticlesSection extends StatelessWidget {
